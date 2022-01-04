@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="js/dice.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>BB-X3</title>
+</head>
+
+<body>
+    <div id="rollPopup">
+        <label for="dificulty">Dificulty</label>
+        <select id="dificulty" name="dificulty">
+            <option value="0">Simple -</option>
+            <option value="1">Easy ◊</option>
+            <option value="2">Average ◊◊</option>
+            <option value="3">Hard ◊◊◊</option>
+            <option value="4">Daunting ◊◊◊◊</option>
+            <option value="5">Formidible ◊◊◊◊◊</option>
+            <option value="5">Impossible ◊◊◊◊◊</option>
+        </select>
+        <br>
+        <label for="challenge">Challenge ⬡</label>
+        <input type="number" min="0" id="challenge" name="challenge">
+        <label for="setback">Setback ▢</label>
+        <input type="number" min="0" id="setback" name="setback">
+        <hr>
+        <label for="boost">Boost ▢</label>
+        <input type="number" min="0" id="boost" name="boost">
+        <button id="rollBtn">Roll</button>
+    </div>
+
+    <div class="pagecontainer">
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="skillbox">
+            <ul class="skillsList">
+                <li>Astrogation</li>
+                <li>Brawl</li>
+                <li>Computers</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script src="js/character.js"></script>
+</body>
+
+</html>

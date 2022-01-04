@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dice Roller</title>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <script src="js/dice.js"></script>
+
+        <style>
+            body
+            {
+                background-image: url("images/stars.png");
+            }
+            input
+            {
+                width: 35pt;
+                position: absolute;
+                left: 200pt;
+
+                margin-bottom: 10pt;
+                height: 15pt;
+            }
+            
+            button:hover
+            {
+                background-color: grey;
+            }
+
+            image
+            {
+                width: 35pt;
+                float: left;
+            }
+        </style>
+
+        
+    </head>
+    <body>
+        <div style="background-color: #aaaaaa; width: 400pt; height: 450pt; top: 50%; left: 50%; transform: translate(-50%, -50%); position: fixed; border-radius: 10pt; padding: 15pt;">
+
+            <lable for="Ability">Ability</lable>
+            <input type="number" min="0" id="Ability" name="Ability">
+            <br>
+            <lable for="Proficency">Proficency</lable>
+            <input type="number" min="0" id="Proficency" name="Proficency">
+            <br>
+            <lable for="Boost">Boost</lable>
+            <input type="number" min="0" id="Boost" name="Boost">
+            <br>
+            <br>
+
+            <lable for="dificulty">Dificulty</lable>
+            <input type="number" min="0" id="dificulty" name="dificulty">
+            <br>
+            <lable for="Challenge">Challenge</lable>
+            <input type="number" min="0" id="Challenge" name="Challenge">
+            <br>
+            <lable for="Setback">Setback</lable>
+            <input type="number" min="0" id="Setback" name="Setback">
+
+            <br>
+            <br>
+            <Label for="erase">Clear Dice After Roll</Label>
+            <input type="checkbox" name="erase" id="erase">
+            <br>
+            <br>
+            <br>
+            <div id="rolls" style="width: 370pt; position: absolute; background-color: #f8f9fa; height: 100pt; border-radius: 10pt; padding: 15pt; text-align: center;">
+
+            </div>
+
+            <script>
+                function removeAllChildNodes(parent) 
+                {
+                    while (parent.firstChild) 
+                    {
+                        parent.removeChild(parent.firstChild);
+                    }
+                }
+
+                function rollFromInput()
+                {
+                    var pool = [];
+                    pool.ability = document.querySelector("#Ability").value;
+                    pool.proficency = document.querySelector("#Proficency").value;
+                    pool.boost = document.querySelector("#Boost").value;
+                    pool.dificulty = document.querySelector("#dificulty").value;
+                    pool.challenge = document.querySelector("#Challenge").value;
+                    pool.setback = document.querySelector("#Setback").value;
+
+                    var results = roll(pool);
+
+                    var erase = document.querySelector("#erase").checked;
+                    if (erase == true)
+                    {
+                        document.querySelector("#Ability").value = null;
+                        document.querySelector("#Proficency").value = null;
+                        document.querySelector("#Boost").value = null;
+                        document.querySelector("#dificulty").value = null;
+                        document.querySelector("#Challenge").value = null;
+                        document.querySelector("#Setback").value = null;
+                    }
+
+                    removeAllChildNodes(document.querySelector("#rolls"));
+                    for (let i = 0; i < results.sucsess; i++)
+                    {                       
+                        var img = document.createElement("img");
+                        img.src = "images/success.png";
+                        document.querySelector("#rolls").appendChild(img);
+                    }
+
+                    for (let i = 0; i < results.failure; i++)
+                    {                       
+                        var img = document.createElement("img");
+                        img.src = "images/failure.png";
+                        document.querySelector("#rolls").appendChild(img);
+                    }
+
+                    for (let i = 0; i < results.advantage; i++)
+                    {                       
+                        var img = document.createElement("img");
+                        img.src = "images/advantage.png";
+                        document.querySelector("#rolls").appendChild(img);
+                    }
+
+                    for (let i = 0; i < results.disadvantage; i++)
+                    {                       
+                        var img = document.createElement("img");
+                        img.src = "images/disadvantage.png";
+                        document.querySelector("#rolls").appendChild(img);
+                    }
+
+                    for (let i = 0; i < results.triumph; i++)
+                    {                       
+                        var img = document.createElement("img");
+                        img.src = "images/triumph.png";
+                        document.querySelector("#rolls").appendChild(img);
+                    }
+
+                    for (let i = 0; i < results.despair; i++)
+                    {                       
+                        var img = document.createElement("img");
+                        img.src = "images/despair.png";
+                        document.querySelector("#rolls").appendChild(img);
+                    }
+                }
+            </script>
+
+            <button onclick="rollFromInput()" style="width: 100%; position: relative; top: 260pt; border-radius: 10pt; border: none; height: 35pt;">Roll</button>
+        </div>
+    </body>
+</html>

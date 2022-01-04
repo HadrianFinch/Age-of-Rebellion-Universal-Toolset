@@ -1,0 +1,103 @@
+body
+{
+    background-image: url("../images/stars.png");
+    overflow: auto;
+    font-family: monospace;
+}
+
+.pagecontainer
+{
+    width: 8.5in;
+    height: 11in;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ebecb7;
+}
+
+#rollPopup
+{
+    position: fixed;
+
+    transform: translate(-50%, -50%);
+
+    display: none;
+    position: absolute;
+    background-color: #a0a0a0;
+    min-width: 95pt;
+    box-shadow: 0pt 8pt 16pt 0pt #00000033;
+    z-index: 1;
+    text-align: left;
+    padding: 5pt;
+    border-radius: 5pt;
+}
+
+#rollPopup option:hover, #rollPopup select:hover {background-color: #a5a5a5;}
+
+#rollPopup option, #rollpopup select
+{
+    color: #330033;
+    padding: 5pt;
+    text-decoration: none !important;
+    font-weight: bold;
+    display: block;
+    font-size: 12pt;
+    border-radius: 5pt;
+
+    width: 150pt;
+    height: 12pt;
+
+    background-color: #b8b3b3;
+}
+
+#rollBtn
+{
+    background-color: #87a4f5;
+    font-weight: bold;
+
+    position: relative;
+    width: 45pt;
+    height: 25pt;
+
+    border-radius: 5pt;
+
+    border-style: solid;
+    border-color: #6d6d6d;
+    border-width: 1pt;
+}
+#rollBtn:hover
+{
+    background-color: #8db0d1;
+}
+
+#challenge, #setback, #boost
+{
+    width: 25pt !important;
+}
+
+label
+{
+    font-weight: bold;
+}
+
+label[for=dificulty]
+{
+    color: #330033;
+}
+
+label[for=challenge]
+{
+    color: red;
+}
+
+label[for=setback]
+{
+    color: black;
+}
+
+label[for=boost]
+{
+    color: #0038ee;
+}
