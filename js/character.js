@@ -34,10 +34,9 @@ var skills =
     0,
     0,
     0,
-    0,
     0
 ];
-var soak = 0;
+var soak = 3;
 var wounds = [11, 0];
 var strain = [12, 0];
 var deffense = [0, 0];
@@ -46,6 +45,7 @@ document.querySelector('#rollBtn').onclick = rollCheck;
 init();
 function init()
 {
+    document.getElementById("Actions").click();
     var skillboxes = document.getElementsByClassName("skillsList");
     var rollPopup = document.querySelector('#rollPopup');
     rollPopup.onmouseover = function(){mouseOverRollPopup = true};
@@ -131,4 +131,21 @@ function rollCheck()
     pool.setback = document.querySelector('#setback').value;
 
     roll(pool);
+}
+
+function openCity(evt, cityName) 
+{
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) 
+    {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) 
+    {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
 }

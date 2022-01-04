@@ -1,3 +1,7 @@
+:root 
+{
+    --themecolor: #c00000;
+}
 /* width */
 ::-webkit-scrollbar 
 {
@@ -33,6 +37,7 @@
 body
 {
     background-image: url("../images/stars.png");
+    background-attachment: fixed;
     overflow: auto;
     font-family: monospace;
 }
@@ -44,13 +49,13 @@ p
 
 .pagecontainer
 {
-    width: 8.5in;
+    width: 10in;
     height: 11in;
 
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0%);
-    background-color: #ebecb7;
+    background-color: #d8d8d8;
 }
 
 #rollPopup
@@ -151,7 +156,11 @@ ul[class="skillsList"]
     border-radius: 5pt;
 
     background-color: #b8b8b8;
-    margin: 5pt;
+    margin: 5pt;    
+
+    border-style: solid;
+    border-color: #313131;
+    border-width: 1pt;
 
     height: 500pt;
     overflow-y: scroll;
@@ -176,4 +185,60 @@ ul[class="skillsList"] li
 ul[class="skillsList"] li:hover
 {
     background-color: #acacac;
+}
+
+.tab 
+{
+    overflow: hidden;
+    border: 1pt solid #ccc;
+    background-color: none;
+}
+  
+/* Style the buttons inside the tab */
+.tab button 
+{
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 3pt;
+    margin: 5pt;
+    transition: 0.3s;
+    font-size: 17px;
+
+    border-bottom-style: solid;
+    border-bottom-color: #00000000;
+    border-bottom-width: 4pt;
+    border-radius: 5pt;
+}
+  
+/* Change background color of buttons on hover */
+.tab button:hover 
+{
+    background-color: #ddd;
+}
+  
+/* Create an active/current tablink class */
+.tab button.active {
+    /* background-color: #ccc; */
+    border: none;
+    border-bottom-style: solid;
+    border-bottom-color: var(--themecolor);
+    border-bottom-width: 4pt;
+}
+  
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6pt 12pt;
+    border: 1pt solid #ccc;
+    border-top: none;
+}
+
+.mainBox
+{
+    margin: 5pt;
+    position: absolute;
+    left: 270pt;
+    top: 0pt;
 }
