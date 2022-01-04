@@ -10,7 +10,7 @@
 <body>
     <div id="rollPopup">
         <label for="dificulty">Dificulty</label>
-        <select id="dificulty" name="dificulty">
+        <!-- <select id="dificulty" name="dificulty">
             <option value="0">Simple -</option>
             <option value="1">Easy ◊</option>
             <option value="2">Average ◊◊</option>
@@ -18,7 +18,9 @@
             <option value="4">Daunting ◊◊◊◊</option>
             <option value="5">Formidible ◊◊◊◊◊</option>
             <option value="5">Impossible ◊◊◊◊◊</option>
-        </select>
+        </select> -->
+        <input type="number" name="dificulty" id="dificulty" min="0" max="7">
+
         <br>
         <label for="challenge">Challenge ⬡</label>
         <input type="number" min="0" id="challenge" name="challenge">
@@ -31,15 +33,48 @@
     </div>
 
     <div class="pagecontainer">
-        <br>
-        <br>
-        <br>
-        <br>
+        
         <div class="skillbox">
             <ul class="skillsList">
-                <li>Astrogation</li>
-                <li>Brawl</li>
-                <li>Computers</li>
+                <p><b>  General Skills</b></p>
+                <li>Astrogation (Int)               </li>
+                <li>Athletics (Br)                  </li>
+                <li>Charm (Pr)                      </li>
+                <li>Coercion (Will)                 </li>
+                <li>Computers (Int)                 </li>
+                <li>Cool (Pr)                       </li>
+                <li>Coordination (Ag)               </li>
+                <li>Deception (Cun)                 </li>
+                <li>Discipline (Will)               </li>
+                <li>Leadership (Pr)                 </li>
+                <li>Mechanics (Int)                 </li>
+                <li>Medicine (Int)                  </li>
+                <li>Negotiaion (Pr)                 </li>
+                <li>Perception (Cun)                </li>
+                <li>Piloting - Planetary (Ag)       </li>
+                <li>Piloting - Space (Ag)           </li>
+                <li>Resilience (Br)                 </li>
+                <li>Skulduggery (Cun)               </li>
+                <li>Stealth (Ag)                    </li>
+                <li>Streetwise (Cun)                </li>
+                <li>Survival (Cun)                  </li>
+                <li>Vigilance (Will)                </li>
+                <hr>
+                <p><b>  Combat Skills</b></p>
+                <li>Brawl (Br)                      </li>
+                <li>Gunnery (Ag)                    </li>
+                <li>Melee (Br)                      </li>
+                <li>Ranged - Light (Ag)             </li>
+                <li>Ranged - Heavy (Ag)             </li>
+                <hr>
+                <p><b>  Knowledge Skills</b></p>
+                <li>Core Worlds (Int)               </li>
+                <li>Education (Int)                 </li>
+                <li>Lore (Int)                      </li>
+                <li>Outer Rim (Int)                 </li>
+                <li>Underworld (Int)                </li>
+                <li>Warfare (Int)                   </li>
+                <li>Xenology (Int)                  </li>
             </ul>
         </div>
     </div>

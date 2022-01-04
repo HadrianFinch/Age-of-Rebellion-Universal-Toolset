@@ -1,8 +1,45 @@
+/* width */
+::-webkit-scrollbar 
+{
+    width: 10px;
+
+    border-top-left-radius : 0pt;
+    border-bottom-left-radius : 0pt;
+
+    border-top-right-radius : 100%;
+    border-bottom-right-radius : 100%;
+}
+  
+/* Track */
+::-webkit-scrollbar-track 
+{
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+}
+   
+/* Handle */
+::-webkit-scrollbar-thumb 
+{
+    background: #5a5a5a; 
+    border-radius: 10px;
+}
+  
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover 
+{
+    background: #666666; 
+}
+
 body
 {
     background-image: url("../images/stars.png");
     overflow: auto;
     font-family: monospace;
+}
+
+p
+{    
+    white-space: pre;
 }
 
 .pagecontainer
@@ -11,9 +48,8 @@ body
     height: 11in;
 
     position: absolute;
-    top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0%);
     background-color: #ebecb7;
 }
 
@@ -21,7 +57,7 @@ body
 {
     position: fixed;
 
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0%);
 
     display: none;
     position: absolute;
@@ -32,25 +68,29 @@ body
     text-align: left;
     padding: 5pt;
     border-radius: 5pt;
+
+    border-style: solid;
+    border-color: #dadada;
+    border-width: 1pt;
 }
 
 #rollPopup option:hover, #rollPopup select:hover {background-color: #a5a5a5;}
 
-#rollPopup option, #rollpopup select
+/* #rollPopup option, #rollpopup select
 {
     color: #330033;
-    padding: 5pt;
+    padding: 2pt;
     text-decoration: none !important;
     font-weight: bold;
     display: block;
-    font-size: 12pt;
+    font-size: 10pt;
     border-radius: 5pt;
 
     width: 150pt;
     height: 12pt;
 
     background-color: #b8b3b3;
-}
+} */
 
 #rollBtn
 {
@@ -100,4 +140,40 @@ label[for=setback]
 label[for=boost]
 {
     color: #0038ee;
+}
+
+ul[class="skillsList"]
+{
+    list-style-type: none; /* Remove bullets */
+    margin: 0pt;
+    padding: 2pt;
+    width: 250pt;
+    border-radius: 5pt;
+
+    background-color: #b8b8b8;
+    margin: 5pt;
+
+    height: 500pt;
+    overflow-y: scroll;
+    box-shadow: 0pt 8pt 16pt 0pt #00000033;
+}
+
+ul[class="skillsList"] li
+{
+    padding: 2pt;
+    border-radius: 5pt;
+    background-color: #cacaca;
+    margin: 8pt;
+
+    border-style: solid;
+    border-color: #7c7c7c;
+    border-width: 1pt;
+
+    cursor: pointer;
+    white-space: pre;
+}
+
+ul[class="skillsList"] li:hover
+{
+    background-color: #acacac;
 }
