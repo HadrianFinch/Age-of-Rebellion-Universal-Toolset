@@ -33,7 +33,79 @@
     </div>
 
     <div class="pagecontainer">
-        
+        <div class="statsBox">
+            <div>
+                <h1></h1>
+                <p>BRAWN</p>
+                <br><br>
+            </div>
+            <div>
+                <h1></h1>
+                <p>AGILITY</p>
+                <br><br>
+            </div>
+            <div>
+                <h1></h1>
+                <p>INTELLECT</p>
+                <br><br>
+            </div>
+            <div>
+                <h1></h1>
+                <p>CUNNING</p>
+                <br><br>
+            </div>
+            <div>
+                <h1></h1>
+                <p>WILLPOWER</p>
+                <br><br>
+            </div>
+            <div>
+                <h1></h1>
+                <p>PRESENCE</p>
+                <br><br>
+            </div>            
+        </div>
+        <div class="healthBox">
+            <div>
+                <div class="box1">
+                    <b>Wound</b><br>
+                    <button class="heal">Heal</button>
+                    <input type="number">
+                    <button class="Damage">Damage</button>
+
+                    <div>
+                        <h1></h1>
+                        <hr>
+                        <h1 class="2"></h1>
+                    </div>
+                </div>
+
+                <div class="box2">
+                    <b>Strain</b><br>
+                    <button class="heal">Heal</button>
+                    <input type="number">
+                    <button class="Damage">Damage</button>
+
+                    <div class="fixxxx">
+                        <h1></h1>
+                        <hr>
+                        <h1 class="2"></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="soakBox">
+            <b>Soak Value</b>
+            <h1></h1>
+        </div>
+        <div id="rangedD">
+            <b>Ranged Defense</b>
+            <h1></h1>
+        </div>
+        <div id="meleeD">
+            <b>Melee Defense</b>
+            <h1></h1>
+        </div>
         <div class="skillbox">
             <ul class="skillsList">
                 <p><b>  General Skills</b></p>
@@ -79,17 +151,106 @@
         </div>
         <div class="mainBox">            
             <div class="tab">
-                <button class="tablinks" onclick="openCity(event, 'Actions')">Actions</button>
-                <button class="tablinks" onclick="openCity(event, 'Inventory')">Inventory</button>
-                <button class="tablinks" onclick="openCity(event, 'Skills&Tallents')">Skills & Tallents</button>
-                <button class="tablinks" onclick="openCity(event, 'Information')">Information</button>
-                <button class="tablinks" onclick="openCity(event, 'Notes')">Notes</button>
-                <button class="tablinks" onclick="openCity(event, 'Extras')">Extras</button>
+                <button class="tablinks" id="defaultOpen" onclick="openTab(event, 'Actions')">Actions</button>
+                <button class="tablinks" onclick="openTab(event, 'Inventory')">Inventory</button>
+                <button class="tablinks" onclick="openTab(event, 'Skills&Tallents')">Skills & Tallents</button>
+                <button class="tablinks" onclick="openTab(event, 'Ships&Vehicles')">Ships & Vehicles</button>
+                <button class="tablinks" onclick="openTab(event, 'Information')">Information</button>
+                <button class="tablinks" onclick="openTab(event, 'Notes')">Notes</button>
+                <button class="tablinks" onclick="openTab(event, 'Extras')">Extras</button>
             </div>
             
             <div id="Actions" class="tabcontent">
-                <h3>London</h3>
-                <p>London is the capital city of England.</p>
+                <h3 style="color: var(--themecolor);">Actions</h3>
+                <hr>
+                <table>
+                    <tr>
+                        <th>Weapon</th>
+                        <th>Skill</th>
+                        <th>Damage</th>
+                        <th>Crit</th>
+                        <th>Range</th>
+                        <th>Special</th>
+                    </tr>
+                    <tr class="rollable">
+                        <td>Shock Prod</td>
+                        <td>Brawl</td>
+                        <td>+0</td>
+                        <td>5</td>
+                        <td>Engaged</td>
+                        <td>Stun 3</td>
+                    </tr>
+                    <tr class="rollable">
+                        <td>Shock Prod</td>
+                        <td>Brawl</td>
+                        <td>+0</td>
+                        <td>5</td>
+                        <td>Engaged</td>
+                        <td>Stun 3</td>
+                    </tr>
+                </table><br>
+
+                <b>Maneuver:</b>
+                <p>    Perform an additional maneuver.</p>
+                <b>Activate Ability:</b>
+                <p>    Activate an ability that says "preform an action to..."</p>
+                <b>Skill Check:</b>
+                <p>    Make an skill check to preform an interaction.</p>
+
+
+                <br>
+                <h3 style="color: var(--themecolor);">Maneuvers</h3>
+                <hr>
+
+                <b>AIM (1 maneuver:</b>
+                <ul>
+                    <li>+<div class="boostIcon"></div> to next combat check; or</li>
+                    <li>Target specific item or hit location; suffer +<div class="setbackIcon"></div> <div class="setbackIcon"></div> to next combat check.</li>
+                </ul>
+                <b>AIM (2 maneuvers):</b>
+                <ul>
+                    <li>+<div class="boostIcon"></div> <div class="boostIcon"></div> to next combat check; or</li>
+                    <li>Target specific item or hit location; suffer +<div class="setbackIcon"></div> to next combat check.</li>
+                </ul>
+                <b>ASSIST:</b>
+                <p>    +<span class="boostIcon"></span> to character being assisted</p>
+                <b>GUARDED STANCE:</b>
+                <p>    +<span class="boostIcon"></span> to combat checks until end of next turn, +1 melee defense</p>
+                <b>INTERACT WITH ENVIRONMENT:</b>
+                <ul>
+                    <li>Moving large item</li>
+                    <li>Opening/closing door</li>
+                </ul>
+                <b>MANAGE GEAR:</b>
+                <ul>
+                    <li>Draw / holster weapon</li>
+                    <li>Ready / load weapon</li>
+                    <li>Take something from storage / put it away</li>
+                </ul>
+                <b>MOUNT / DISMOUNT:</b>
+                <p>    <span style="font-size: larger; color: var(--dificultyColor);">♦♦</span> for untrained animal</p>
+                <b>MOVE:</b>
+                <ul>
+                    <li>1 maneuver = moving within short range</li>
+                    <li>1 maneuver = between engaged & short</li>
+                    <li>1 maneuver = between short & medium</li>
+                    <li>2 maneuvers = between medium & long</li>
+                    <li>2 maneuvers = between long & extreme</li>
+                </ul>
+                <b>PREPARATION:</b>
+                <p>    Required by certain abilities.</p>
+                <b>STAND / DROP PRONE:</b>
+                <p>    Prone characters are</p>
+                <ul>
+                    <li>+<span class="setbackIcon"></span> when making melee attacks</li>
+                    <li>+<span class="setbackIcon"></span> when targeted by ranged attacks</li>
+                    <li>+<span class="boostIcon"></span> when targeted by melee attacks</li>
+                </ul>
+                <b>TAKING COVER:</b>
+                <ul>
+                    <li>+1 range defense</li>
+                    <li>+<span class="setbackIcon"></span> to Perception checks</li>
+                </ul>
             </div>
             
             <div id="Inventory" class="tabcontent">
@@ -102,6 +263,11 @@
                 <p>Tokyo is the capital of Japan.</p>
             </div>
             
+            <div id="Ships&Vehicles" class="tabcontent">
+                <h3>Tokyo</h3>
+                <p>Tokyo is the capital of Japan.</p>
+            </div>
+
             <div id="Information" class="tabcontent">
                 <h3>Tokyo</h3>
                 <p>Tokyo is the capital of Japan.</p>
@@ -115,7 +281,7 @@
             <div id="Extras" class="tabcontent">
                 <h3>Tokyo</h3>
                 <p>Tokyo is the capital of Japan.</p>
-            </div>
+            </div>            
         </div>
     </div>
     

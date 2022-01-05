@@ -41,21 +41,31 @@ var wounds = [11, 0];
 var strain = [12, 0];
 var deffense = [0, 0];
 
+
+
+var currentSkillSelected = 0;
 document.querySelector('#rollBtn').onclick = rollCheck;
 init();
 function init()
 {
-    document.getElementById("Actions").click();
     var skillboxes = document.getElementsByClassName("skillsList");
     var rollPopup = document.querySelector('#rollPopup');
     rollPopup.onmouseover = function(){mouseOverRollPopup = true};
     for (let i = 0; i < skillboxes.length; i++) 
     {
         var elm = skillboxes[i];    
-        elm.onclick = showRollPopup;
+        elm.onclick = function(e){showRollPopup(e, i);};
         elm.onmouseout = hideRollPopup;
     }
     rollPopup.onmouseout = mouseLeftRollPopup;
+
+    // Fill in abilitys
+    var abilityBoxes = document.querySelectorAll('.statsBox h1');
+    for (let i = 0; i < abilityBoxes.length; i++) 
+    {
+        var elm = abilityBoxes[i];
+        elm.innerHTML = abilitys[i];
+    }
 
     // Auto add ▰▰▱▱▱
     var rollerListElements = document.querySelectorAll('ul[class="skillsList"] li');
@@ -67,13 +77,25 @@ function init()
         {
             text = text + "▰";
         }
-
+        
         for (let b = 0; b < (5 - skills[i]); b++) 
         {
             text = text + "▱";
         }
         elm.innerHTML = elm.innerHTML + text;
     }
+    document.getElementById("defaultOpen").click();
+
+    document.querySelector('#soakBox h1').innerHTML = soak;
+    document.querySelector('#rangedD h1').innerHTML = deffense[0];
+    document.querySelector('#meleeD h1').innerHTML = deffense[1];
+    
+    document.querySelector('.box1 div h1').innerHTML = wounds[1];
+    document.querySelector('.box1 div h1[class="2"]').innerHTML = wounds[0];
+    
+    document.querySelector('.box2 div h1').innerHTML = strain[1];
+    document.querySelector('.box2 div h1[class="2"]').innerHTML = strain[0];
+    
 }
 var mouseOverRollPopup = false;
 
@@ -83,10 +105,11 @@ function mouseLeftRollPopup()
     hideRollPopup();
 }
 
-function showRollPopup(e)
+function showRollPopup(e, i)
 {
+    currentSkillSelected = i;
     var popup = document.querySelector('#rollPopup');
-    // console.log("Y: " + e.screenY);
+    console.log("Y: " + e.screenY);
     if (e.screenY < 100) 
     {
         popup.style.bottom = "";
@@ -118,8 +141,8 @@ function rollCheck()
     mouseOverRollPopup = false;
     hideRollPopup();
 
-    var proficency = 2; // TODO: make based on skill
-    var ability = 1; // TODO: Make based on ability - skill
+    var proficency = skills[currentSkillSelected]; // TODO: make based on skill
+    var ability = ability; // TODO: Make based on ability - skill
 
     var pool = [];
     pool.proficency = proficency;
@@ -133,7 +156,7 @@ function rollCheck()
     roll(pool);
 }
 
-function openCity(evt, cityName) 
+function openTab(evt, cityName) 
 {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
