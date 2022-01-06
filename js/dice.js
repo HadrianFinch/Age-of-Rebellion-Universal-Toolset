@@ -6,6 +6,7 @@ function rollFake()
 
 function roll(pool)
 {
+    console.log(pool);
     var results = initEmpty();
 
     // roll profocency

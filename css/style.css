@@ -557,3 +557,30 @@ td
 {
     margin: 4pt;
 }
+
+.diceResult
+{
+    position: fixed;
+    width: 225pt;
+    min-height: 70pt;
+    padding: 5pt;
+    /* bottom: 25pt;
+    right: 25pt; */
+    bottom: 25pt;
+    right: -300pt;
+    background-color: #f8f9fa;
+    z-index: 2;
+    border-radius: 10pt;
+    border: 1pt solid #313131;
+    box-shadow: 0pt 8pt 16pt 0pt #00000033;
+    
+    animation-name: animate-popin-right;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+    animation-play-state: paused;
+}
+
+.diceResult b, .diceResult p
+{
+    margin: 2pt;
+}

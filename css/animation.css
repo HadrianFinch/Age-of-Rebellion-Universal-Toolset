@@ -1,0 +1,38 @@
+.animate-popin-right
+{
+    animation-name: animate-popin-right;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes animate-popin-right 
+{
+    0%
+    {
+        right: -300pt;
+    }
+    90%
+    {
+        right: 35pt;
+    }
+    100%
+    {
+        right: 25pt;
+    }
+}
+
+@keyframes animate-popout-right 
+{
+    0%
+    {
+        right: 25pt;
+    }
+    10%
+    {
+        right: 35pt;
+    }
+    100%
+    {
+        right: -300pt;
+    }
+}
