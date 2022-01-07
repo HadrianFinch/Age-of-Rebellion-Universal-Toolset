@@ -163,17 +163,16 @@
             <div class="tab">
                 <button class="tablinks" id="defaultOpen" onclick="openTab(event, 'Actions')">Actions</button>
                 <button class="tablinks" onclick="openTab(event, 'Inventory')">Inventory</button>
-                <button class="tablinks" onclick="openTab(event, 'Skills&Tallents')">Skills & Tallents</button>
+                <button class="tablinks" onclick="openTab(event, 'SkillsTallents')">Skills & Tallents</button>
                 <button class="tablinks" onclick="openTab(event, 'Ships&Vehicles')">Ships & Vehicles</button>
-                <button class="tablinks" onclick="openTab(event, 'Information')">Information</button>
-                <button class="tablinks" onclick="openTab(event, 'Notes')">Notes</button>
-                <button class="tablinks" onclick="openTab(event, 'Extras')">Extras</button>
+                <!-- <button class="tablinks" onclick="openTab(event, 'Information')">Information</button> -->
+                <!-- <button class="tablinks" onclick="openTab(event, 'Notes')">Notes</button> -->
             </div>
             
             <div id="Actions" class="tabcontent">
                 <h3 style="color: var(--themecolor);">Actions</h3>
                 <hr>
-                <table>
+                <table id="weaponsTable">
                     <tr>
                         <th>Weapon</th>
                         <th>Skill</th>
@@ -182,22 +181,7 @@
                         <th>Range</th>
                         <th>Special</th>
                     </tr>
-                    <tr class="rollable">
-                        <td>Shock Prod</td>
-                        <td>Brawl</td>
-                        <td>+0</td>
-                        <td>5</td>
-                        <td>Engaged</td>
-                        <td>Stun 3</td>
-                    </tr>
-                    <tr class="rollable">
-                        <td>Shock Prod</td>
-                        <td>Brawl</td>
-                        <td>+0</td>
-                        <td>5</td>
-                        <td>Engaged</td>
-                        <td>Stun 3</td>
-                    </tr>
+                    
                 </table><br>
 
                 <b>Maneuver:</b>
@@ -261,38 +245,203 @@
                     <li>+1 range defense</li>
                     <li>+<span class="setbackIcon"></span> to Perception checks</li>
                 </ul>
+                <br>
             </div>
             
             <div id="Inventory" class="tabcontent">
-                <h3>Paris</h3>
-                <p>Paris is the capital of France.</p> 
+                <h3 style="color: var(--themecolor);">Credits</h3>
+                <hr>
+                <input onkeyup="saveCredits()" min="0" type="number"> Credits
+                <br>
+                <br>
+                <h3 style="color: var(--themecolor);">Equipment</h3>
+                <hr>
+                <div>
+                    <table id="equipment-table">
+                        <tr>
+                            <th>Name</th>
+                            <th>Notes</th>
+                        </tr>
+                        <tr>
+                            <td>Commlink</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Fusion Cutter</td>
+                            <td>can be used as attack</td>
+                        </tr>
+                        <tr>
+                            <td>Fire Extinguisher</td>
+                            <td>smokescreen?</td>
+                        </tr>
+                        <tr>
+                            <td>Circular Saw</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Electrobiniculars</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Toolkit</td>
+                            <td>for repairs and computer slicing</td>
+                        </tr>
+                        <tr>
+                            <td>Liquid-Cable Launcher</td>
+                            <td>+<span class="boostIcon"></span> to checks to climb</td>
+                        </tr>
+                        <tr>
+                            <td>Periscope</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                    <br>
+                </div>
+                <h3 style="color: var(--themecolor);">Other Items</h3>
+                <hr>
+                <textarea onkeyup="saveOtherItems()" id="inventory-otherItems" placeholder="Put your other items here"></textarea>
             </div>
             
-            <div id="Skills&Tallents" class="tabcontent">
-                <h3>Tokyo</h3>
-                <p>Tokyo is the capital of Japan.</p>
+            <div id="SkillsTallents" class="tabcontent">
+                <img src="images/Engineer-Mechanic.png">
             </div>
             
             <div id="Ships&Vehicles" class="tabcontent">
-                <h3>Tokyo</h3>
-                <p>Tokyo is the capital of Japan.</p>
+                <h3 style="color: var(--themecolor);">Starship Basics</h3>
+                <hr>
+                <b>SILHOUETTE ≤ 4</b><br>
+                <i>Defense Zones: Forward / Aft</i>
+                <ul>
+                    <li>1 free starship maneuver per round</li>
+                    <li>2 strain = second starship maneuver</li>
+                </ul>
+                
+                <b>SILHOUETTE 5+</b><br>
+                <i>Defense Zones: Forward / Aft / Port / Starboard</i>
+                <ul>
+                    <li>1 free starship maneuver per round (max. 1)</li>
+                    <li>FIRE ARCS: Forward / Aft / Port / Starboard</li>
+                    <li>LIMITED AMMO: Starships can't reload with a maneuver. Must return to base or carrier ship.</li>
+                    <li>STARSHIPS vs. CHARACTERS: Starship damage and armor is 10x stronger.</li>
+                </ul>
+
+                <h3 style="color: var(--themecolor);">Starship Actions</h3>
+                <hr>
+                <b>BOOST SHIELDS (Mechanics <span style="font-size: larger; color: var(--dificultyColor);">♦♦♦</span>)</b>
+                <p>    <img src="images/success.png" height="12pt"> = 1 strain, +1 defense to defensive zone (1 turn)</p>
+                <b>CO-PILOT (Piloting <span style="font-size: larger; color: var(--dificultyColor);">♦♦</span>)</b>
+                <p>    <img src="images/success.png" height="12pt"> = -<span style="font-size: larger; color: var(--dificultyColor);">♦</span> to pilot's next piloting check</p>
+                <b>FIRE DISCIPLINE (Leadership ddd / Discipline ddd)</b>
+                <ul>
+                    <li>+<span class="boostIcon"></span> to next crew member firing</li>
+                    <li><img src="images/success.png" height="12pt"><img src="images/success.png" height="12pt"> = Bonus applies to additional crew</li>
+                    <li><img src="images/advantage.png" height="12pt"><img src="images/advantage.png" height="12pt"><img src="images/advantage.png" height="12pt"> = +1 strain to target hit</li>
+                </ul>
+
+                <b>JAMMING (Computers <span style="font-size: larger; color: var(--dificultyColor);">♦♦</span>)</b>
+                <ul>
+                    <li><img src="images/success.png" height="12pt"> = Target must make Computers check (<span style="font-size: larger; color: var(--dificultyColor);">♦♦</span>) to use communications system</li>
+                    <li><img src="images/success.png" height="12pt"><img src="images/success.png" height="12pt"> = +<span style="font-size: larger; color: var(--dificultyColor);">♦</span> to target's Computers check</li>
+                    <li><img src="images/advantage.png" height="12pt"> = +1 affected target</li>
+                </ul>
+                
+                <b>MANUAL REPAIRS (Athletics <span style="font-size: larger; color: var(--dificultyColor);">♦♦♦</span> - 1/encounter)</b>
+                <ul>
+                    <li><img src="images/success.png" height="12pt"> = -1 hull trauma</li>
+                    <li><img src="images/success.png" height="12pt"><img src="images/success.png" height="12pt"> = Additional -1 hull trauma</li>
+                </ul>
+
+                <b>PLOT COURSE (Astrogation <span style="font-size: larger; color: var(--dificultyColor);">♦♦</span> / Perception <span style="font-size: larger; color: var(--dificultyColor);">♦♦♦</span>)</b>
+                <p>    <img src="images/success.png" height="12pt"> = Cancel <span class="setbackIcon"></span> from difficult terrain</p>
+                <b>SCAN THE ENEMY (Perception <span style="font-size: larger; color: var(--dificultyColor);">♦♦♦</span>)</b>
+                <ul>
+                    <li><img src="images/success.png" height="12pt"> = Learn target's weapons, mods, system strain, and hull trauma thresholds</li>
+                    <li><img src="images/advantage.png" height="12pt"><img src="images/advantage.png" height="12pt"> = Learn current system strain and hull trauma</li>
+                </ul>
+
+                <b>SLICE ENEMY'S SYSTEMS (Computers <span style="font-size: larger; color: var(--dificultyColor);">♦♦♦</span>)</b>
+                <ul>
+                    <li><img src="images/success.png" height="12pt"> = -1 defense in one defensive zone on target</li>
+                    <li><img src="images/advantage.png" height="12pt"><img src="images/advantage.png" height="12pt"> = +1 strain to target</li>
+                    <li><img src="images/triumph.png" height="12pt"> = Disable target weapon system for 1 round</li>
+                </ul>
+
+                <b>“SPOOF” MISSILES (Computers <span style="font-size: larger; color: var(--dificultyColor);">♦♦</span> / Vigilance <span style="font-size: larger; color: var(--dificultyColor);">♦♦♦</span>)</b>
+                <ul>
+                    <li><img src="images/success.png" height="12pt"> = +<span style="font-size: larger; color: var(--dificultyColor);">♦</span> for Guided weapons for 1 turn</li>
+                    <li><img src="images/advantage.png" height="12pt"><img src="images/advantage.png" height="12pt"> = +<span style="font-size: larger; color: var(--dificultyColor);">♦</span> for Guided weapons</li>
+                </ul>
+                <br>
+                <h3 style="color: var(--themecolor);">Starship Maneuvers</h3>
+                <hr>
+                <b>ACCELERATE / DECELERATE (Pilot Only)</b>
+                <p>Increase / decrease vehicle's speed by 1 (min. 0, max. speed rating)</p>
+                <b>FLY / DRIVE (Pilot Only)</b>
+                <ul>
+                    <li>Speed 0: Cannot use this maneuver.</li>
+                    <li>Speed 1:</li>
+                    <ul>
+                        <li>1 maneuver = Within close range</li>
+                        <li>2 maneuvers = Between close and short</li>
+                    </ul>
+                    
+                    <li>Speed 2-4:</li>                    
+                    <ul>
+                        <li>1 maneuver = Within close range</li>
+                        <li>1 maneuver = Between close and short</li>
+                        <li>2 maneuvers = Between close and medium</li>
+                    </ul>
+                    
+                    <li>Speed 5-6:</li>                    
+                    <ul>
+                        <li>1 maneuver = Within close range</li>
+                        <li>1 maneuver = Between close and medium</li>
+                        <li>2 maneuvers = Between close and long</li>
+                    </ul>
+                    
+                </ul>
+                
+                <b>EVASIVE ACTION (Pilot Only; Silhouette 1-4, Speed 3+)</b>
+                <ul>
+                    <li>Upgrade <span style="font-size: larger; color: var(--dificultyColor);">♦</span></li>
+                    <li>+<span style="font-size: larger; color: var(--dificultyColor);">♦</span> for all attacks made by ship</li>
+                    <li>Lasts until end of pilot's next turn</li>
+                </ul>
+                
+                <b>STAY ON TARGET (Pilot Only; Silhouette 1-4, Speed 3+)</b>
+                <ul>
+                    <li>Upgrade <span style="font-size: larger; color: var(--dificultyColor);">♦</span> on ship's combat checks</li>
+                    <li>Upgrade <span style="font-size: larger; color: var(--dificultyColor);">♦</span> on combat checks targeting ship</li>
+                    <li>Lasts until end of pilot's next turn</li>
+                </ul>
+
+                <b>PUNCH IT (Pilot Only; Silhouette 1-4)</b>
+                <ul>
+                    <li>Go immediately to maximum speed</li>
+                    <li>Suffer 1 strain per point of speed increased</li>
+                </ul>
+                <br>
+                
             </div>
 
             <div id="Information" class="tabcontent">
-                <h3>Tokyo</h3>
-                <p>Tokyo is the capital of Japan.</p>
+                
             </div>
             
             <div id="Notes" class="tabcontent">
-                <h3>Tokyo</h3>
-                <p>Tokyo is the capital of Japan.</p>
-            </div>
-            
-            <div id="Extras" class="tabcontent">
-                <h3>Tokyo</h3>
-                <p>Tokyo is the capital of Japan.</p>
-            </div>            
+                
+            </div>          
         </div>
+
+        <!-- <div class="xpBox totalXP">
+            <input value="0" type="number">
+            <b>Total XP</b>
+        </div>
+    
+        <div class="xpBox availableXP">
+            <input value="0" type="number">
+            <b>Available XP</b>
+        </div> -->
     </div>
     
     <script src="js/character.js"></script>

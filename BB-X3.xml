@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<character name="BB-X3 'Exy'">
+    <ability name="brawn">1</ability>
+    <ability name="agility">2</ability>
+    <ability name="intellect">3</ability>
+    <ability name="cunning">2</ability>
+    <ability name="willpower">2</ability>
+    <ability name="presence">1</ability>
+
+    <modifier value="2" score="soak">
+    
+    <wound threshold="11">
+    <strain threshold="12">
+
+    <inventory>
+        <credits>500</credits>
+        <item name="Commlink">
+    </inventory>
+
+    <skills>
+        <skill rank="1">
+        <skill rank="0">
+        <skill rank="1">
+        <skill rank="0">
+        <skill rank="2">
+        <skill rank="0">
+        <skill rank="0">
+        <skill rank="1">
+        <skill rank="0">
+        <skill rank="0">
+        <skill rank="2">
+        <skill rank="0">
+        <skill rank="2">
+        <skill rank="0">
+        <skill rank="0">
+        <skill rank="1">
+        <skill rank="0">
+        <skill rank="0">
+        <skill rank="1">
+        <skill rank="1">
+        <skill rank="0">
+        <skill rank="0">
+        <skill rank="0">
+        <skill rank="0">
+        <skill rank="0">
+        <skill rank="1">
+        <skill rank="0">
+        <skill rank="0">
+        <skill rank="0">
+        <skill rank="0">
+        <skill rank="0">
+    </skills>
+</character>

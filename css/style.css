@@ -13,6 +13,12 @@
     --challengeColor: red;
 }
 
+textarea
+{
+    border-radius: 5pt;
+    padding: 5pt;
+}
+
 .boostIcon
 {
     position: relative;
@@ -21,6 +27,7 @@
     border-radius: 1pt;
     display: inline-block;
     background-color: var(--boostColor);
+    z-index: 0;
     /* margin: 1pt; */
 }
 
@@ -32,6 +39,7 @@
     border-radius: 1pt;
     display: inline-block;
     background-color: var(--setbackColor);
+    z-index: 0;
     /* margin: 1pt; */
 }
 
@@ -85,7 +93,7 @@ p
 .pagecontainer
 {
     width: 10in;
-    height: 11in;
+    height: 9.6in;
 
     position: absolute;
     left: 50%;
@@ -197,7 +205,7 @@ ul[class="skillsList"]
     margin: 5pt;    
 
     border-style: solid;
-    border-color: #313131;
+    border-color: var(--themecolor);
     border-width: 1pt;
 
     height: 500pt;
@@ -234,6 +242,9 @@ ul[class="skillsList"] li:hover
     /* border-top-right-radius: 5pt; */
     background-color: var(--forground1);
     height: 32pt;
+    top: 0;
+    z-index: 1;
+    position: sticky;
 }
   
 /* Style the buttons inside the tab */
@@ -246,7 +257,7 @@ ul[class="skillsList"] li:hover
     padding: 3pt;
     margin: 5pt;
     transition: 0.3s;
-    font-size: 17px;
+    font-size: 15px;
 
     border-bottom-style: solid;
     border-bottom-color: #00000000;
@@ -294,9 +305,11 @@ ul[class="skillsList"] li:hover
     top: 160pt;
 
     background-color: var(--forground1);
+
+    width: 441pt;
     
     border-style: solid;
-    border-color: #313131;
+    border-color: var(--themecolor);
     border-width: 1pt;
     border-radius: 5pt;
     overflow-y: scroll;
@@ -314,6 +327,7 @@ table
 tr[class="rollable"]
 {
     background-color: var(--forground2);
+    cursor: pointer;
 }
 
 tr[class="rollable"]:hover
@@ -341,7 +355,7 @@ td
     background-color: var(--forground1);
 
     border-style: solid;
-    border-color: #313131;
+    border-color: var(--themecolor);
     border-width: 1pt;
     border-radius: 5pt;
     box-shadow: 0pt 8pt 16pt 0pt #00000033;
@@ -360,13 +374,17 @@ td
     top: 0pt;
     text-align: center;
     display: inline-block;
-    width: 60pt;
+    width: 58pt;
     background-color: var(--forground2);
     border-radius: 5pt;
-    height: 80pt;
+    height: 78pt;
     margin-left: 5pt;
     margin-top: 5pt;
     margin-bottom: 5pt;
+    
+    border-style: solid;
+    border-color: #7c7c7c;
+    border-width: 1pt;
 }
 
 .healthBox
@@ -385,7 +403,7 @@ td
     margin: 5pt;
     
     border-style: solid;
-    border-color: #313131;
+    border-color: var(--themecolor);
     border-width: 1pt;
     border-radius: 5pt;
     box-shadow: 0pt 8pt 16pt 0pt #00000033;
@@ -421,7 +439,7 @@ td
 {
     width: 55pt;
     border-radius: 5pt;
-    background-color: #009700;
+    color: #009700;
     border: 1pt solid darkgreen;
     margin: 5pt;
     height: 15pt;
@@ -430,12 +448,16 @@ td
 
 .heal:hover
 {
-    background-color: #007400;
+    color: #007400;
+    border-width: 1.5pt;
+    box-shadow: 0pt 8pt 16pt 0pt #00000033;
 }
 
 .Damage:hover
 {
-    background-color: #cc0000;
+    color: #cc0000;
+    border-width: 1.5pt;
+    box-shadow: 0pt 8pt 16pt 0pt #00000033;
 }
 
 .healthBox div div input
@@ -457,7 +479,7 @@ td
 {
     width: 55pt;
     border-radius: 5pt;
-    background-color: red;
+    color: red;
     border: 1pt solid darkred;
     margin: 5pt;
     height: 15pt;
@@ -497,7 +519,7 @@ td
     position: absolute;
     margin: 3pt;
     background-color: var(--forground1);
-    border: 1pt solid #313131;
+    border: 1pt solid var(--themecolor);
     border-radius: 5pt;
     box-shadow: 0pt 8pt 16pt 0pt #00000033;
     z-index: 2;
@@ -519,7 +541,7 @@ td
     position: absolute;
     margin: 3pt;
     background-color: var(--forground1);
-    border: 1pt solid #313131;
+    border: 1pt solid var(--themecolor);
     border-radius: 5pt;
     box-shadow: 0pt 8pt 16pt 0pt #00000033;
     z-index: 2;
@@ -541,7 +563,7 @@ td
     position: absolute;
     margin: 3pt;
     background-color: var(--forground1);
-    border: 1pt solid #313131;
+    border: 1pt solid var(--themecolor);
     border-radius: 5pt;
     box-shadow: 0pt 8pt 16pt 0pt #00000033;
     z-index: 2;
@@ -571,7 +593,7 @@ td
     background-color: #f8f9fa;
     z-index: 2;
     border-radius: 10pt;
-    border: 1pt solid #313131;
+    border: 1pt solid var(--themecolor);
     box-shadow: 0pt 8pt 16pt 0pt #00000033;
     
     animation-name: animate-popin-right;
@@ -583,4 +605,83 @@ td
 .diceResult b, .diceResult p
 {
     margin: 2pt;
+}
+
+#equipment-table tr td
+{
+    border: 1pt solid black;
+}
+
+#addRow
+{
+    width: 15pt;
+    height: 15pt;
+    border-radius: 45pt;
+    border: none;
+    background-color: cornflowerblue;
+    margin: 3pt;
+}
+
+#addRow:hover
+{
+    background-color: #527ece;
+}
+
+#Inventory input
+{
+    width: 50pt;
+    border-radius: 5pt;
+    border: none;
+}
+
+#SkillsTallents
+{
+    overflow: scroll;
+}
+
+.xpBox
+{
+    height: 30pt;
+    width: 65pt;
+    border-radius: 5pt;
+    
+    background-color: var(--forground1);
+    border: 1pt solid var(--themecolor);
+    box-shadow: 0pt 8pt 16pt 0pt #00000033;
+    position: absolute;
+    margin: 5pt;
+    padding: 5pt;
+
+    top: 616pt;
+    text-align: center;
+}
+
+.xpBox input
+{
+    margin: 0pt;
+    width: 55pt;
+    height: 20pt;
+    background-color: var(--forground1);
+    border: none;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Chrome, Safari, Edge, Opera */
+.xpBox input::-webkit-outer-spin-button,
+.xpBox input::-webkit-inner-spin-button 
+{
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.xpBox input[type=number] 
+{
+  -moz-appearance: textfield;
+}
+
+.availableXP
+{
+    right: 2pt;
 }

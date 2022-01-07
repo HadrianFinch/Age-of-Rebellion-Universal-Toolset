@@ -41,6 +41,9 @@ var soak = 3;
 var wounds = [11, 0];
 var strain = [12, 0];
 var deffense = [0, 0];
+var weapons = [["Shock Prod", 22, 0, 5, "Engaged", "Stun 3"]];
+var credits = 0;
+var xp = [0, 0];
 
 // Define Constants
 var skillAbilitys = 
@@ -48,14 +51,77 @@ var skillAbilitys =
 var skillNames = 
 [
     "Astrogation (Int)","Athletics (Br)","Charm (Pr)","Coercion (Will)","Computers (Int)","Cool (Pr)","Coordination (Ag)","Deception (Cun)","Discipline (Will)", "Leadership (Pr)","Mechanics (Int)","Medicine (Int)","Negotiaion (Pr)","Perception (Cun)","Piloting - Planetary (Ag)","Piloting - Space (Ag)","Resilience (Br)",         "Skulduggery (Cun)",      "Stealth (Ag)",           "Streetwise (Cun)",        "Survival (Cun)",          "Vigilance (Will)",   "Brawl (Br)","Gunnery (Ag)","Melee (Br)","Ranged - Light (Ag)","Ranged - Heavy (Ag)","Core Worlds (Int)","Education (Int)","Lore (Int)","Outer Rim (Int)","Underworld (Int)","Warfare (Int)","Xenology (Int)"
-]
+];
 
+var creditsBox = document.querySelector("#Inventory input");
+
+function addTD(parent, value)
+{
+    var td = document.createElement("td");
+    td.innerHTML = value;
+    parent.appendChild(td);
+}
 
 var currentSkillSelected = 0;
 document.querySelector('#rollBtn').onclick = rollCheck;
 init();
 function init()
 {
+    // Load saved values
+    if (localStorage.getItem("currentWounds") == 'null')
+    {
+        wounds[1] = 0;        
+    }
+    else
+    {        
+        wounds[1] = localStorage.getItem("currentWounds");
+    }
+
+    if (localStorage.getItem("currentStrain") == 'null')
+    {
+        strain[1] = 0;        
+    }
+    else
+    {        
+        strain[1] = localStorage.getItem("currentStrain");
+    }
+
+    if (localStorage.getItem("credits") == 'null')
+    {
+        credits = 0;        
+    }
+    else
+    {        
+        credits = localStorage.getItem("credits");
+        creditsBox.value = credits;
+    }
+
+    if (localStorage.getItem("otherItems") == 'null')
+    {
+    }
+    else
+    {        
+        document.querySelector("#inventory-otherItems").innerHTML = localStorage.getItem("otherItems");
+    }
+
+    if (localStorage.getItem("xp_0") == 'null')
+    {     
+        xp[0] = 0;
+    }
+    else
+    {        
+        xp[0] = localStorage.getItem("xp_0");
+    }
+
+    if (localStorage.getItem("xp_1") == null)
+    {     
+        xp[1] = 0;
+    }
+    else
+    {        
+        xp[1] = localStorage.getItem("xp_1");
+    }
+
     var skillboxes = document.querySelectorAll(".skillsList li");
     var rollPopup = document.querySelector('#rollPopup');
     rollPopup.onmouseover = function(){mouseOverRollPopup = true};
@@ -74,6 +140,26 @@ function init()
     {
         var elm = abilityBoxes[i];
         elm.innerHTML = abilitys[i];
+    }
+
+    // Fll in weapons
+    var weaponsContainerDiv = document.querySelector("#weaponsTable");
+    for (let i = 0; i < weapons.length; i++) 
+    {
+        var elm = weapons[i];
+        var row = document.createElement("tr");
+        row.classList.add("rollable");
+        weaponsContainerDiv.appendChild(row);
+
+        addTD(row, elm[0]);
+        addTD(row, skillNames[elm[1]]);
+        addTD(row, elm[2]);
+        addTD(row, elm[3]);
+        addTD(row, elm[4]);
+        addTD(row, elm[5]);
+
+        row.setAttribute("data-indexID", elm[1] );
+        row.onclick = function(e){var foo = this.getAttribute("data-indexID"); showRollPopup(e, foo);};
     }
 
     // Auto add ▰▰▱▱▱
@@ -302,4 +388,139 @@ function displayRollResult(results)
         }, 500); // the time of the animation
     
     }, time); // the time of the animation
+}
+
+healthInit();
+function healthInit()
+{
+    document.querySelector('.box1 button[class="heal"]').onclick = woundsHeal;
+    document.querySelector('.box1 button[class="heal"]').onmouseover = function(){woundMouseover('heal', true)};
+    document.querySelector('.box1 button[class="heal"]').onmouseout = function(){woundMouseover('heal', false)};
+    document.querySelector('.box1 button[class="Damage"]').onclick = woundsDammage;
+    document.querySelector('.box1 button[class="Damage"]').onmouseover = function(){woundMouseover('damage', true)};
+    document.querySelector('.box1 button[class="Damage"]').onmouseout = function(){woundMouseover('damage', false)};
+
+    document.querySelector('.box2 button[class="heal"]').onclick = strainHeal;
+    document.querySelector('.box2 button[class="Damage"]').onclick = strainDamage;
+}
+
+var woundCurrent = document.querySelector(".box1 div h1");
+var strainCurrent = document.querySelector(".box2 div h1");
+
+function woundMouseover(button, enter)
+{
+    var input = document.querySelector(".box1 input").value;
+    if (!enter) 
+    {
+        woundCurrent.style.color = null;
+        woundCurrent.style.fontSize = null;
+        woundCurrent.innerHTML = wounds[1];
+        return;
+    }
+
+    if ((input != null) && (input != 0) && (input != '0')) 
+    {        
+        if (button == 'heal') 
+        {
+            woundCurrent.style.color = "green";
+            woundCurrent.innerHTML = input;
+        }
+
+        if (button == 'damage') 
+        {
+            woundCurrent.style.color = "red";
+            woundCurrent.style.fontSize = "12pt";
+            woundCurrent.innerHTML = wounds[1] + " +<br>" + (input + " - " + soak);
+        }
+    }
+}
+
+function woundsHeal()
+{
+    var input = document.querySelector(".box1 input").value;
+    if (input > wounds[1]) 
+    {
+        wounds[1] = 0;
+    }
+    else
+    {
+        wounds[1] = wounds[1] - input;
+    }
+
+    localStorage.setItem("currentWounds", wounds[1]);
+
+    document.querySelector(".box1 input").value = "";
+    textboxEditEnd(woundCurrent, wounds[1]);
+}
+
+function woundsDammage()
+{
+    var input = document.querySelector(".box1 input").value;
+    if (input > (wounds[0] - wounds[1])) 
+    {
+        wounds[1] = wounds[0];
+    }
+    else
+    {
+        wounds[1] = wounds[1] + Math.max(0, (parseInt(input, 10) - soak));
+    }
+
+    localStorage.setItem("currentWounds", wounds[1]);
+
+    document.querySelector(".box1 input").value = "";
+    textboxEditEnd(woundCurrent, wounds[1]);
+}
+
+function textboxEditEnd(box, val)
+{
+    box.style.color = null;
+    box.style.fontSize = null;
+    box.innerHTML = val;
+}
+
+function strainHeal()
+{
+    var input = document.querySelector(".box2 input").value;
+    if (input > strain[1]) 
+    {
+        strain[1] = 0;
+    }
+    else
+    {
+        strain[1] = strain[1] - input;
+    }
+
+    localStorage.setItem("currentStrain", strain[1]);
+
+    document.querySelector(".box2 input").value = "";
+    textboxEditEnd(strainCurrent, strain[1]);
+}
+
+function strainDamage()
+{
+    var input = document.querySelector(".box2 input").value;
+    if (input > (strain[0] - strain[1])) 
+    {
+        strain[1] = strain[0];
+    }
+    else
+    {
+        strain[1] = strain[1] + Math.max(0, (parseInt(input, 10)));
+    }
+
+    localStorage.setItem("currentStrain", strain[1]);
+
+    document.querySelector(".box2 input").value = "";
+    textboxEditEnd(strainCurrent, strain[1]);
+}
+
+function saveCredits()
+{
+    credits = creditsBox.value;
+    localStorage.setItem("credits", credits);
+}
+
+function saveOtherItems()
+{
+    localStorage.setItem("otherItems", (document.querySelector("#inventory-otherItems").value));
 }
