@@ -23,12 +23,12 @@
         <input type="number" name="dificulty" id="dificulty" min="0" max="7">
 
         <br>
-        <label for="challenge">Challenge ⬡</label>
+        <label for="challenge">Challenge ⬢</label>
         <input type="number" min="0" id="challenge" name="challenge">
-        <label for="setback">Setback ▢</label>
+        <label for="setback">Setback ■</label>
         <input type="number" min="0" id="setback" name="setback">
         <hr>
-        <label for="boost">Boost ▢</label>
+        <label for="boost">Boost ■</label>
         <input type="number" min="0" id="boost" name="boost">
         <button id="rollBtn">Roll</button>
     </div>
@@ -167,6 +167,7 @@
                 <button class="tablinks" onclick="openTab(event, 'Ships&Vehicles')">Ships & Vehicles</button>
                 <!-- <button class="tablinks" onclick="openTab(event, 'Information')">Information</button> -->
                 <!-- <button class="tablinks" onclick="openTab(event, 'Notes')">Notes</button> -->
+                <button class="tablinks" onclick="openTab(event, 'Settings')">Settings</button>
             </div>
             
             <div id="Actions" class="tabcontent">
@@ -430,6 +431,13 @@
             
             <div id="Notes" class="tabcontent">
                 
+            </div>     
+
+            <div id="Settings" class="tabcontent">
+                <h3 style="color: var(--themecolor);">Theme Color</h3>
+                <hr>
+                <input type="color" id="themeColorPicker"><button id="applyThemeColor">Apply</button>
+    
             </div>          
         </div>
 

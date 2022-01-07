@@ -122,6 +122,15 @@ function init()
         xp[1] = localStorage.getItem("xp_1");
     }
 
+    if (localStorage.getItem("themeColor") == null)
+    {     
+    }
+    else
+    {        
+        setThemeColor(localStorage.getItem("themeColor"));
+        document.querySelector("#themeColorPicker").value = localStorage.getItem("themeColor");
+    }
+
     var skillboxes = document.querySelectorAll(".skillsList li");
     var rollPopup = document.querySelector('#rollPopup');
     rollPopup.onmouseover = function(){mouseOverRollPopup = true};
@@ -192,6 +201,13 @@ function init()
     document.querySelector('.box2 div h1[class="2"]').innerHTML = strain[0];
     
     document.querySelector(".diceResult").style.right = "-300pt";
+
+    document.querySelector("#applyThemeColor").onclick = 
+    function()
+    {
+        var color = document.querySelector("#themeColorPicker");
+        setThemeColor(color.value);
+    };
 }
 var mouseOverRollPopup = false;
 
@@ -523,4 +539,10 @@ function saveCredits()
 function saveOtherItems()
 {
     localStorage.setItem("otherItems", (document.querySelector("#inventory-otherItems").value));
+}
+
+function setThemeColor(color)
+{
+    document.querySelector(':root').style.setProperty('--themecolor', color)
+    localStorage.setItem("themeColor", color)
 }

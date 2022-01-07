@@ -8,7 +8,7 @@
     --boostColor: #0038ee;
     --setbackColor: black;
     --abilityColor: #12661d;
-    --dificultyColor: #330033;
+    --dificultyColor: #4e094e;
     --proficencyColor: #fbff00;
     --challengeColor: red;
 }
@@ -77,7 +77,7 @@ textarea
 
 body
 {
-    background-image: url("../images/stars.png");
+    background-image: url("../images/stars.png");  /* make use var */
     background-attachment: fixed;
     overflow: auto;
     font-family: monospace;
@@ -684,4 +684,15 @@ td
 .availableXP
 {
     right: 2pt;
+}
+
+#themeColorPicker
+{
+    border-radius: 3pt;
+}
+
+#applyThemeColor
+{
+    border-radius: 3pt;
+    margin: 5pt;
 }
