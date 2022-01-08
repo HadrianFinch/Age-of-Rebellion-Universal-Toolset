@@ -77,7 +77,12 @@ textarea
 
 body
 {
-    background-image: url("../images/stars.png");  /* make use var */
+    background-image: url("../images/starDestroyers.jpg");
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
     background-attachment: fixed;
     overflow: auto;
     font-family: monospace;
@@ -695,4 +700,30 @@ td
 {
     border-radius: 3pt;
     margin: 5pt;
+}
+
+#diceRoller
+{
+    border-radius: 100%;
+    
+    background-color: var(--themecolor);
+    box-shadow: 0pt 8pt 16pt 0pt #00000033;
+
+    width: 35pt;
+    height: 35pt;
+
+    position: fixed;
+    bottom: 10pt;
+    left: 10pt;
+    border: 1pt solid #00000000;
+
+    background-image: url("../images/success-good.png");
+    background-repeat: no-repeat;
+    background-size: 23pt, 23pt;
+    background-position: center;
+}
+
+#diceRoller:hover
+{
+    border: 1pt solid black;
 }

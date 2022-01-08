@@ -131,6 +131,15 @@ function init()
         document.querySelector("#themeColorPicker").value = localStorage.getItem("themeColor");
     }
 
+    if (localStorage.getItem("backgroundImage") == 'null')
+    {     
+    }
+    else
+    {        
+        setBackgroundImage(localStorage.getItem("backgroundImage"));
+        document.querySelector("#backgroundImagePicker").value = localStorage.getItem("themeColor");
+    }
+
     var skillboxes = document.querySelectorAll(".skillsList li");
     var rollPopup = document.querySelector('#rollPopup');
     rollPopup.onmouseover = function(){mouseOverRollPopup = true};
@@ -202,11 +211,24 @@ function init()
     
     document.querySelector(".diceResult").style.right = "-300pt";
 
-    document.querySelector("#applyThemeColor").onclick = 
+    document.querySelector(".applyThemeColor").onclick = 
     function()
     {
         var color = document.querySelector("#themeColorPicker");
         setThemeColor(color.value);
+    };
+
+    document.querySelector(".applyBackground").onclick = 
+    function()
+    {
+        var image = document.querySelector("#backgroundImagePicker");
+        setBackgroundImage(image.value);
+    };
+
+    document.querySelector("#diceRoller").onclick = 
+    function()
+    {
+        window.open("diceRoller.html", "", "width=600,height=785")
     };
 }
 var mouseOverRollPopup = false;
@@ -543,6 +565,12 @@ function saveOtherItems()
 
 function setThemeColor(color)
 {
-    document.querySelector(':root').style.setProperty('--themecolor', color)
-    localStorage.setItem("themeColor", color)
+    document.querySelector(':root').style.setProperty('--themecolor', color);
+    localStorage.setItem("themeColor", color);
+}
+
+function setBackgroundImage(image)
+{
+    document.querySelector('body').style.backgroundImage = ("url(" + image + ")");
+    localStorage.setItem("backgroundImage", image);
 }

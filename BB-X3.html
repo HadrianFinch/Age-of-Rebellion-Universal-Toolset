@@ -436,8 +436,19 @@
             <div id="Settings" class="tabcontent">
                 <h3 style="color: var(--themecolor);">Theme Color</h3>
                 <hr>
-                <input type="color" id="themeColorPicker"><button id="applyThemeColor">Apply</button>
-    
+                <input type="color" id="themeColorPicker"><button class="apply applyThemeColor">Apply</button>
+                
+                <br><br>
+                <h3 style="color: var(--themecolor);">Background Image</h3>
+                <hr>
+                <select id="backgroundImagePicker">
+                    <option value="images/stars.png">Stars</option>
+                    <option value="images/deathStar.jpg">Imperial Halway</option>
+                    <option value="images/hoth.jpg">Hoth</option>
+                    <option value="images/starDestroyers.jpg">Star Destroyers</option>
+                    <option value="images/tatooine.jpg">Tatooine</option>
+                    <option value="images/xWings.jpg">X-Wings</option>
+                </select><button class="apply applyBackground">Apply</button>
             </div>          
         </div>
 
@@ -450,6 +461,11 @@
             <input value="0" type="number">
             <b>Available XP</b>
         </div> -->
+
+    </div>
+
+    <div id="diceRoller">
+        
     </div>
     
     <script src="js/character.js"></script>
