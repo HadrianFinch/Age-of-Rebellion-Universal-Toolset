@@ -41,9 +41,26 @@ var soak = 3;
 var wounds = [11, 0];
 var strain = [12, 0];
 var deffense = [0, 0];
-var weapons = [["Shock Prod", 22, 0, 5, "Engaged", "Stun 3"]];
+var weapons = 
+[
+    ["Shock Prod", 22, 0, 5, "Engaged", "Stun 3"],
+    ["Fusion Cutter", 22, 5, 3, "Engaged", "Breach 1, Burn 3, Vicious 3"]
+];
+var equipment = 
+[
+    ["Commlink", "handheld", "186"],
+    ["Fusion Cutter", "Can me used as weapon", "197"],
+    ["Circular Saw", "", ""],
+    ["Fire Extinguisher", "Doubles as smokescreen", ""],
+    ["Electrobinoculars", "-<span class=\"setbackIcon\"></span> on Perception checks", "190"],
+    ["Toolkit", "", "198"],
+    ["Liquid-Cable Launcher", "+<span class=\"boostIcon\"></span> on climbing", ""],
+    ["Liquid-Cable Launcher", "+<span class=\"boostIcon\"></span> on climbing", ""],
+    ["Periscope", "", ""]
+];
 var credits = 0;
 var xp = [0, 0];
+var characterName = "BB-X3 'Exy'"
 
 // Define Constants
 var skillAbilitys = 
@@ -142,6 +159,7 @@ function init()
 
     var skillboxes = document.querySelectorAll(".skillsList li");
     var rollPopup = document.querySelector('#rollPopup');
+    document.querySelector('title').innerHTML = characterName;
     rollPopup.onmouseover = function(){mouseOverRollPopup = true};
     for (let i = 0; i < skillboxes.length; i++) 
     {
@@ -178,6 +196,19 @@ function init()
 
         row.setAttribute("data-indexID", elm[1] );
         row.onclick = function(e){var foo = this.getAttribute("data-indexID"); showRollPopup(e, foo);};
+    }
+
+    // Fll in equipment
+    var equipmentContainerDiv = document.querySelector("#equipment-table");
+    for (let i = 0; i < equipment.length; i++) 
+    {
+        var elm = equipment[i];
+        var row = document.createElement("tr");
+        equipmentContainerDiv.appendChild(row);
+
+        addTD(row, elm[0]);
+        addTD(row, elm[1]);
+        addTD(row, elm[2]);
     }
 
     // Auto add ▰▰▱▱▱
@@ -573,4 +604,18 @@ function setBackgroundImage(image)
 {
     document.querySelector('body').style.backgroundImage = ("url(" + image + ")");
     localStorage.setItem("backgroundImage", image);
+}
+
+var diceRoller = document.querySelector('#diceRoller');
+diceRoller.onclick = toggelDiceRoller;
+function toggelDiceRoller()
+{
+    if (diceRoller.classList.contains("active"))
+    {
+        diceRoller.classList.remove("active");
+    }
+    else
+    {
+        diceRoller.classList.add("active");
+    }
 }
