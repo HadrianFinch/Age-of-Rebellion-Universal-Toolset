@@ -2,6 +2,7 @@
 {
     --themecolor: #c00000;
     --forground1: #b8b8b8;
+    --forground1-hover: #919191;
     --forground2: #cacaca;
     --forground2-hover: #acacac;
 
@@ -722,12 +723,92 @@ td
     background-size: 23pt, 23pt;
     background-position: center;
 
-    transition: 0.5s;
+    transition: 0.2s;
 }
 
 #diceRoller.active
 {
-    height: 235pt;
+    height: 278pt;
     background-image: none;
 }
 
+#diceRoller div
+{
+    display: none;
+    background-color: var(--forground1);
+    width: 31pt;
+    height: 31pt;
+    margin: 2pt;
+    margin-bottom: 5pt;
+    border-radius: 45pt;
+    text-align: center;
+    user-select: none;
+}
+
+#diceRoller.active div
+{
+    display: block;
+    cursor: pointer;
+}
+
+#diceRoller div h1
+{
+    font-size: 28pt;
+    margin: 0pt;
+    padding: 0pt;
+    top: -5pt;
+    position: relative;
+}
+
+#diceRoller div h1.dimond
+{
+    font-size: 28pt;
+    margin: 0pt;
+    padding: 0pt;
+    top: -2pt;
+    position: relative;
+}
+
+#diceRoller div h1.square
+{
+    font-size: 28pt;
+    margin: 0pt;
+    padding: 0pt;
+    top: -2.5pt;
+    position: relative;
+}
+
+#diceRoller div b
+{
+    position: relative;
+    bottom: 12pt;
+    right: -10pt;
+    border-radius: 10pt;
+    width: 8pt;
+    height: 8pt;
+    background-color: var(--forground2);
+    border: 0.5pt solid black;
+    padding-left: 2pt;
+    padding-right: 2pt;
+}
+
+#diceRoller div:hover
+{
+    background-color: var(--forground1-hover);
+}
+
+#diceRoller div h1.close
+{
+    position: relative;
+    top: 2.8pt;
+    color: var(--themecolor);
+    font-size: 18pt;
+    transition: 0.2s;
+}
+
+.close.active
+{
+    width: 100pt !important;
+    transition: 0.2s;
+    font-weight: bold;
+}

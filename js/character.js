@@ -261,6 +261,7 @@ function init()
     {
         window.open("diceRoller.html", "", "width=600,height=785")
     };
+    rollerInit();
 }
 var mouseOverRollPopup = false;
 
@@ -404,8 +405,15 @@ function displayRollResult(results)
             document.querySelector(".diceResult div").appendChild(img);
         }
 
-        document.querySelector('.diceResult b').innerHTML = skillNames[currentSkillSelected];
-        console.log("Current Skill: " + currentSkillSelected);
+        if (currentSkillSelected == -1) 
+        {
+            document.querySelector('.diceResult b').innerHTML = "Custom Roll";
+        }
+        else
+        {
+            document.querySelector('.diceResult b').innerHTML = skillNames[currentSkillSelected];
+            console.log("Current Skill: " + currentSkillSelected);
+        }
 
         var resultsText = document.querySelector('.diceResult p');
         resultsText.innerHTML = "";
@@ -606,16 +614,95 @@ function setBackgroundImage(image)
     localStorage.setItem("backgroundImage", image);
 }
 
-var diceRoller = document.querySelector('#diceRoller');
-diceRoller.onclick = toggelDiceRoller;
-function toggelDiceRoller()
+var diceRoller = document.getElementById('diceRoller');
+diceRoller.onclick = function(){toggelDiceRoller(true)};
+document.querySelector('#diceRoller div.close').onclick = function(e){e.stopPropagation(); toggelDiceRoller(false);};
+
+function toggelDiceRoller(toggel)
 {
-    if (diceRoller.classList.contains("active"))
-    {
-        diceRoller.classList.remove("active");
-    }
-    else
+    if (toggel == true)
     {
         diceRoller.classList.add("active");
     }
+    else
+    {
+        diceRoller.classList.remove("active");
+        if (document.querySelector('#diceRoller div.close').classList.contains("active") == true) 
+        {
+            rollPool();
+        }
+        
+        var b = document.querySelectorAll('#diceRoller div b');
+        for (let i = 0; i < b.length; i++) 
+        {
+            const elm = b[i];
+            elm.innerHTML = "0";
+        }
+    }
+
 }
+
+function rollerInit()
+{
+    var elms = document.querySelectorAll("#diceRoller div");
+    for (let i = 0; i < (elms.length - 1); i++) 
+    {
+        const elm = elms[i];
+        elm.onclick = function(){incrimentDice(this);};
+    }
+}
+
+function incrimentDice(elm)
+{
+    elm.children[1].innerHTML = (parseInt(elm.children[1].innerHTML, 10) + 1);
+    var btn = document.querySelector('#diceRoller div.close');
+    btn.classList.add('active');
+    btn.children[0].innerHTML = "Roll";
+}
+
+function rollPool()
+{
+    var pool = [];
+
+    var b = document.querySelectorAll('#diceRoller div b');
+    for (let i = 0; i < b.length; i++) 
+    {
+        const elm = b[i];
+
+        if (i == 0) 
+        {
+            pool.ability = elm.innerHTML;
+        }
+        if (i == 1) 
+        {
+            pool.proficency = elm.innerHTML;
+        }
+        if (i == 2) 
+        {
+            pool.boost = elm.innerHTML;
+        }
+        if (i == 3) 
+        {
+            pool.dificulty = elm.innerHTML;
+        }
+        if (i == 4)
+        {
+            pool.challenge = elm.innerHTML;
+        }
+        if (i == 5) 
+        {
+            pool.setback = elm.innerHTML;
+        }
+    }
+
+    currentSkillSelected = -1;
+
+    var btn = document.querySelector('#diceRoller div.close');
+    btn.children[0].innerHTML = "❌";
+    btn.classList.remove("active");
+
+    var result = roll(pool);
+    displayRollResult(result);
+}
+
+
