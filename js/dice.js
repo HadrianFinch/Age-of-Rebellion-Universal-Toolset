@@ -326,3 +326,123 @@ function rollBoost(count)
     }
     return results;
 }
+
+var currentSkillSelected = -1;
+
+function displayRollResult(results)
+{
+    var time = 1
+    if (document.querySelector(".diceResult").style.right != "-300pt") 
+    {
+        document.querySelector(".diceResult").style.animationPlayState = 'paused';
+        document.querySelector(".diceResult").style.animationName = 'animate-popout-right';
+        document.querySelector(".diceResult").style.animationPlayState = 'running';
+        document.querySelector(".diceResult").style.right = "-300pt";
+        time = 500;
+    }
+    setTimeout(function() 
+    {        
+        removeAllChildNodes(document.querySelector(".diceResult div"));
+        for (let i = 0; i < results.sucsess; i++)
+        {                       
+            var img = document.createElement("img");
+            img.src = "images/success.png";
+            document.querySelector(".diceResult div").appendChild(img);
+        }
+        
+        for (let i = 0; i < results.failure; i++)
+        {                       
+            var img = document.createElement("img");
+            img.src = "images/failure.png";
+            document.querySelector(".diceResult div").appendChild(img);
+        }
+    
+        for (let i = 0; i < results.advantage; i++)
+        {                       
+            var img = document.createElement("img");
+            img.src = "images/advantage.png";
+            document.querySelector(".diceResult div").appendChild(img);
+        }
+        
+        for (let i = 0; i < results.disadvantage; i++)
+        {                       
+            var img = document.createElement("img");
+            img.src = "images/disadvantage.png";
+            document.querySelector(".diceResult div").appendChild(img);
+        }
+        
+        for (let i = 0; i < results.triumph; i++)
+        {                       
+            var img = document.createElement("img");
+            img.src = "images/triumph.png";
+            document.querySelector(".diceResult div").appendChild(img);
+        }
+        
+        for (let i = 0; i < results.despair; i++)
+        {                       
+            var img = document.createElement("img");
+            img.src = "images/despair.png";
+            document.querySelector(".diceResult div").appendChild(img);
+        }
+
+        if (currentSkillSelected == -1) 
+        {
+            document.querySelector('.diceResult b').innerHTML = "Custom Roll";
+        }
+        else
+        {
+            document.querySelector('.diceResult b').innerHTML = skillNames[currentSkillSelected];
+            console.log("Current Skill: " + currentSkillSelected);
+        }
+
+        var resultsText = document.querySelector('.diceResult p');
+        resultsText.innerHTML = "";
+        if (results.sucsess > 0) 
+        {
+            resultsText.innerHTML = resultsText.innerHTML + (results.sucsess + " success");
+        }
+        if (results.failure > 0) 
+        {
+            if (resultsText.innerHTML != ""){resultsText.innerHTML = resultsText.innerHTML + ", "};
+            resultsText.innerHTML = resultsText.innerHTML + (results.failure + " failure");
+        }
+        if (results.advantage > 0) 
+        {
+            if (resultsText.innerHTML != ""){resultsText.innerHTML = resultsText.innerHTML + ", "};
+            resultsText.innerHTML = resultsText.innerHTML + (results.advantage + " advantage");
+        }
+        if (results.disadvantage > 0) 
+        {
+            if (resultsText.innerHTML != ""){resultsText.innerHTML = resultsText.innerHTML + ", "};
+            resultsText.innerHTML = resultsText.innerHTML + (results.disadvantage + " disadvantage");
+        }
+        if (results.triumph > 0) 
+        {
+            if (resultsText.innerHTML != ""){resultsText.innerHTML = resultsText.innerHTML + ", "};
+            resultsText.innerHTML = resultsText.innerHTML + (results.triumph + " triumph");
+        }
+        if (results.despair > 0) 
+        {
+            if (resultsText.innerHTML != ""){resultsText.innerHTML = resultsText.innerHTML + ", "};
+            resultsText.innerHTML = resultsText.innerHTML + (results.despair + " despair");
+        }
+        
+        document.querySelector(".diceResult").style.animationName = 'animate-popin-right';
+        document.querySelector(".diceResult").style.animationPlayState = 'running';
+        document.querySelector(".diceResult").style.right = "25pt";
+        
+        setTimeout(function() 
+        {
+            document.querySelector(".diceResult").style.animationPlayState = 'paused';
+            document.querySelector(".diceResult").style.animationName = 'animate-popout-right';
+            
+            document.querySelector(".diceResult").onclick = function()
+            {
+                document.querySelector(".diceResult").style.animationPlayState = 'running';
+                document.querySelector(".diceResult").style.right = "-300pt";
+            };
+            
+        }, 500); // the time of the animation
+    
+    }, time); // the time of the animation
+}
