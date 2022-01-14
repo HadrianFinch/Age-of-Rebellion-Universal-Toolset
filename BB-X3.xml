@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<character name="BB-X3 'Exy'">
+<character race="droid" name="BB-X3 'Exy'">
     <ability name="brawn">1</ability>
     <ability name="agility">2</ability>
     <ability name="intellect">3</ability>
@@ -7,47 +7,64 @@
     <ability name="willpower">2</ability>
     <ability name="presence">1</ability>
 
-    <modifier value="2" score="soak">
-    
-    <wound threshold="11">
-    <strain threshold="12">
+    <modifier value="2" score="soak"></modifier>
+
+    <wound threshold="11"></wound>
+    <strain threshold="12"></strain>
 
     <inventory>
         <credits>500</credits>
-        <item name="Commlink">
+
+        <weapon properties="Stun 3" skillID="22" damage="0" crit="5" range="Engaged">Shock Prod</weapon>
+        <weapon properties="Breech 1, Burn 3, Vicious 3" skillID="22" damage="5" crit="3" range="Engaged">Fusion Cutter</weapon>
+
+        <item name="Commlink" quickNotes="Handheld" page="186"></item>
+        <item name="Fusion Cutter" quickNotes="Can be used as weapon" page="197"></item>
+        <item name="Circular Saw" quickNotes="" page=""></item>
+        <item name="Fire Extinguisher" quickNotes="Doubles as smokescreen" page=""></item>
+        <item name="Electrobinoculars" quickNotes="-SETBACK on Perception checks" page="190"></item>
+        <item name="Toolkit" quickNotes="" page="198"></item>
+        <item name="Liquid-Cable Launcher" quickNotes="+BOOST on climbing" page=""></item>
+        <item name="Liquid-Cable Launcher" quickNotes="+BOOST on climbing" page=""></item>
+        <item name="Periscope" quickNotes="" page=""></item>
     </inventory>
 
+    <defense ranged="0" melee="0"></defense>
+
     <skills>
-        <skill rank="1">
-        <skill rank="0">
-        <skill rank="1">
-        <skill rank="0">
-        <skill rank="2">
-        <skill rank="0">
-        <skill rank="0">
-        <skill rank="1">
-        <skill rank="0">
-        <skill rank="0">
-        <skill rank="2">
-        <skill rank="0">
-        <skill rank="2">
-        <skill rank="0">
-        <skill rank="0">
-        <skill rank="1">
-        <skill rank="0">
-        <skill rank="0">
-        <skill rank="1">
-        <skill rank="1">
-        <skill rank="0">
-        <skill rank="0">
-        <skill rank="0">
-        <skill rank="0">
-        <skill rank="0">
-        <skill rank="1">
-        <skill rank="0">
-        <skill rank="0">
-        <skill rank="0">
-        <skill rank="0">
-        <skill rank="0">
+        <skill rank="1"></skill>
+        <skill rank="0"></skill>
+        <skill rank="1"></skill>
+        <skill rank="0"></skill>
+        <skill rank="2"></skill>
+        <skill rank="0"></skill>
+        <skill rank="0"></skill>
+        <skill rank="1"></skill>
+        <skill rank="0"></skill>
+        <skill rank="0"></skill>
+        <skill rank="2"></skill>
+        <skill rank="0"></skill>
+        <skill rank="0"></skill>
+        <skill rank="2"></skill>
+        <skill rank="0"></skill>
+        <skill rank="2"></skill>
+        <skill rank="0"></skill>
+        <skill rank="0"></skill>
+        <skill rank="1"></skill>
+        <skill rank="0"></skill>
+        <skill rank="0"></skill>
+        <skill rank="1"></skill>
+        <skill rank="1"></skill>
+        <skill rank="0"></skill>
+        <skill rank="0"></skill>
+        <skill rank="0"></skill>
+        <skill rank="0"></skill>
+        <skill rank="0"></skill>
+        <skill rank="1"></skill>
+        <skill rank="0"></skill>
+        <skill rank="0"></skill>
+        <skill rank="0"></skill>
+        <skill rank="0"></skill>
+        <skill rank="0"></skill>
     </skills>
 </character>

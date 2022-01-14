@@ -5,10 +5,19 @@
     <script src="js/dice.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/animation.css">
+    <script src="http://cdn.jsdelivr.net/g/filesaver.js"></script>
     <title></title>
 </head>
 
 <body>
+    <div class="blackoutModal">
+        <div>
+            <h1>Select Character</h1>
+            <input type="file"><br><br>
+            <button>Play</button>
+            <br><b style="color: red;"></b>
+        </div>
+    </div>
     <div id="rollPopup">
         <label for="dificulty">Dificulty</label>
         <!-- <select id="dificulty" name="dificulty">
@@ -174,16 +183,23 @@
                 <h3 style="color: var(--themecolor);">Actions</h3>
                 <hr>
                 <table id="weaponsTable">
-                    <tr>
+                    <tr contenteditable="false">
                         <th>Weapon</th>
                         <th>Skill</th>
                         <th>Damage</th>
                         <th>Crit</th>
                         <th>Range</th>
                         <th>Special</th>
+                        <th class="editHeadder weapons">edit</th>
                     </tr>
-                    
-                </table><br>
+                    <tr>
+                        
+                    </tr>
+                </table>
+                <div class="contentEditable weapons">
+                    <button class="addRow">+</button><button class="saveChanges">Save Changes</button>
+                </div>
+                <br>
 
                 <b>Maneuver:</b>
                 <p>    Perform an additional maneuver.</p>
@@ -418,6 +434,17 @@
                     <option value="images/tatooine.jpg">Tatooine</option>
                     <option value="images/xWings.jpg">X-Wings</option>
                 </select><button class="apply applyBackground">Apply</button>
+                <br><br>
+                
+                <h3 style="color: var(--themecolor);">Loaded Character</h3>
+                <hr>
+                
+                <input type="file" id="characterSelector"><button class="apply characterSelectorApply">Apply</button>
+                <br><br>
+                
+                <h3 style="color: var(--themecolor);">Export Current Character</h3>
+                <hr>
+                <button class="apply exportXML">Export</button>
             </div>          
         </div>
 
@@ -469,6 +496,7 @@
     </div>
     
     <script src="js/character.js"></script>
+    <script src="js/xml.js"></script>
 </body>
 
 </html>

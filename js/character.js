@@ -1,45 +1,9 @@
 // Define Character
-var abilitys = [1, 2, 3, 2, 2, 1];
-var skills = 
-[
-    1,
-    0,
-    1,
-    0,
-    2,
-    0,
-    0,
-    1,
-    0,
-    0,
-    2,
-    0,
-    0,
-    2,
-    0,
-    2,
-    0,
-    0,
-    1,
-    0,
-    0,
-    1,
-    1,
-    0,
-    0,
-    0,
-    0,
-    0,
-    1,
-    0,
-    0,
-    0,
-    0,
-    0
-];
-var soak = 3;
-var wounds = [11, 0];
-var strain = [12, 0];
+var abilitys = [0, 0, 0, 0, 0, 0];
+var skills = [];
+var soak = 0;
+var wounds = [10, 0];
+var strain = [10, 0];
 var deffense = [0, 0];
 var weapons = 
 [
@@ -60,7 +24,7 @@ var equipment =
 ];
 var credits = 0;
 var xp = [0, 0];
-var characterName = "BB-X3 'Exy'"
+var characterName = "AoR Character Sheets"
 
 // Define Constants
 var skillAbilitys = 
@@ -77,6 +41,7 @@ function addTD(parent, value)
     var td = document.createElement("td");
     td.innerHTML = value;
     parent.appendChild(td);
+    return td;
 }
 
 var currentSkillSelected = 0;
@@ -84,6 +49,37 @@ document.querySelector('#rollBtn').onclick = rollCheck;
 init();
 function init()
 {
+    // Wipe curremt page
+    var abilityBoxes = document.querySelectorAll('.statsBox h1');
+    var weaponsContainerDiv = document.querySelector("#weaponsTable");
+    var equipmentContainerDiv = document.querySelector("#equipment-table");
+    var rollerListElements = document.querySelectorAll('ul[class="skillsList"] li');
+
+    // wipe weapons
+    for (let i = weaponsContainerDiv.children.length - 1; i > 0; i--) 
+    {
+        var elm = weaponsContainerDiv.children[i];
+        elm.remove();
+    }
+
+    // wipe equipment
+    for (let i = equipmentContainerDiv.children.length - 1; i > 0; i--) 
+    {
+        var elm = equipmentContainerDiv.children[i];
+        elm.remove();
+    }
+
+    // Wipe ▰▰▱▱▱
+    for (let i = 0; i < rollerListElements.length; i++) 
+    {
+        var elm = rollerListElements[i];
+        var char = elm.innerHTML.charAt(elm.innerHTML.length -1 );
+        if (char != ' ')
+        {
+            elm.innerHTML = elm.innerHTML.substring(0, elm.innerHTML.length - 5);
+        }
+    }
+
     // Load saved values
     if (localStorage.getItem("currentWounds") == 'null')
     {
@@ -171,7 +167,6 @@ function init()
     rollPopup.onmouseout = mouseLeftRollPopup;
 
     // Fill in abilitys
-    var abilityBoxes = document.querySelectorAll('.statsBox h1');
     for (let i = 0; i < abilityBoxes.length; i++) 
     {
         var elm = abilityBoxes[i];
@@ -179,7 +174,6 @@ function init()
     }
 
     // Fll in weapons
-    var weaponsContainerDiv = document.querySelector("#weaponsTable");
     for (let i = 0; i < weapons.length; i++) 
     {
         var elm = weapons[i];
@@ -195,11 +189,14 @@ function init()
         addTD(row, elm[5]);
 
         row.setAttribute("data-indexID", elm[1] );
-        row.onclick = function(e){var foo = this.getAttribute("data-indexID"); showRollPopup(e, foo);};
+        row.onclick = function(e)
+        {
+            var foo = this.getAttribute("data-indexID"); 
+            showRollPopup(e, foo);
+        };
     }
 
     // Fll in equipment
-    var equipmentContainerDiv = document.querySelector("#equipment-table");
     for (let i = 0; i < equipment.length; i++) 
     {
         var elm = equipment[i];
@@ -212,7 +209,6 @@ function init()
     }
 
     // Auto add ▰▰▱▱▱
-    var rollerListElements = document.querySelectorAll('ul[class="skillsList"] li');
     for (let i = 0; i < skills.length; i++) 
     {
         var elm = rollerListElements[i];
@@ -242,22 +238,19 @@ function init()
     
     document.querySelector(".diceResult").style.right = "-300pt";
 
-    document.querySelector(".applyThemeColor").onclick = 
-    function()
+    document.querySelector(".applyThemeColor").onclick = function()
     {
         var color = document.querySelector("#themeColorPicker");
         setThemeColor(color.value);
     };
 
-    document.querySelector(".applyBackground").onclick = 
-    function()
+    document.querySelector(".applyBackground").onclick = function()
     {
         var image = document.querySelector("#backgroundImagePicker");
         setBackgroundImage(image.value);
     };
 
-    document.querySelector("#diceRoller").onclick = 
-    function()
+    document.querySelector("#diceRoller").onclick = function()
     {
         window.open("diceRoller.html", "", "width=600,height=785")
     };
@@ -705,4 +698,247 @@ function rollPool()
     displayRollResult(result);
 }
 
+var apply = document.querySelector('.characterSelectorApply');
+var filePicker = document.querySelector('#characterSelector');
 
+var parser = new DOMParser();
+var xml;
+
+apply.onclick = function()
+{
+    loadFile(filePicker);
+};
+
+function replaceIcons(text)
+{
+    text = text.replace("SETBACK", "<span class=\"setbackIcon\"></span>");
+    text = text.replace("BOOST", "<span class=\"boostIcon\"></span>");
+    return text;
+}
+
+function parseXML()
+{
+    // Set the name
+    characterName = xml.getElementsByTagName("character")[0].getAttribute("name");
+
+    // set abilitys
+    var xmlAbilitys = xml.getElementsByTagName("ability");
+    for (let i = 0; i < xmlAbilitys.length; i++) 
+    {
+        var elm = xmlAbilitys[i];
+        abilitys[i] = elm.innerHTML;
+    }
+
+    // Set the skills
+    var xmlSkills = xml.getElementsByTagName("skill");
+    for (let i = 0; i < xmlSkills.length; i++) 
+    {
+        var elm = xmlSkills[i];
+        var rank =  elm.getAttribute("rank");
+        skills[i] = rank;
+    }
+
+    // Set Inventory
+    var xmlEquipment = xml.getElementsByTagName("item");
+    equipment = [];
+    for (let i = 0; i < xmlEquipment.length; i++) 
+    {
+        var elm = xmlEquipment[i];
+        var equip = [elm.getAttribute("name"), replaceIcons(elm.getAttribute("quickNotes")), elm.getAttribute("page")];
+        equipment[equipment.length] = equip;
+    }
+
+    // Set Weapons
+    var xmlWeapons = xml.getElementsByTagName("weapon");
+    weapons = [];
+    for (let i = 0; i < xmlWeapons.length; i++) 
+    {
+        var elm = xmlWeapons[i];
+        var weapon = 
+        [
+            elm.innerHTML,
+            elm.getAttribute("skillID"),
+            elm.getAttribute("damage"),
+            elm.getAttribute("crit"),
+            elm.getAttribute("range"),
+            elm.getAttribute("properties")
+        ];
+        weapons[weapons.length] = weapon;
+    }
+
+    // Set Health
+    var xmlWound = xml.getElementsByTagName("wound")[0];
+    var xmlStrain = xml.getElementsByTagName("strain")[0];
+    wounds[0] = xmlWound.getAttribute("threshold");
+    strain[0] = xmlStrain.getAttribute("threshold");
+
+    // Set Modifiers
+    var soakMod = 0;
+    var woundMod = 0;
+    var strainMod = 0;
+    var xmlModifiers = xml.getElementsByTagName("modifier");
+    for (let i = 0; i < xmlModifiers.length; i++)
+    {
+        var elm = xmlModifiers[i];
+        var value = parseInt(elm.getAttribute("value"), 10);
+        var score = elm.getAttribute("score");
+        
+        if (score == 'soak') 
+        {
+            soakMod += value;
+        }
+        if (score == 'woundThreshold') 
+        {
+            woundMod += value;
+        }
+        if (score == 'strainThreshold') 
+        {
+            strainMod += value;
+        }
+    }
+
+    soak = parseInt(abilitys[0]) + soakMod;
+    wounds[0] = (parseInt(wounds[0], 10) + woundMod);
+    strain[0] = (parseInt(strain[0], 10) + strainMod);
+
+    init();
+}
+
+document.querySelector('.exportXML').onclick = exportXML;
+function exportXML()
+{
+    var blob = new Blob([(new XMLSerializer).serializeToString(xml)], {type: "application/xhtml+xml;charset=" + document.characterSet});
+    saveAs(blob,  characterName + ".xml");
+}
+
+function loadFile(filePickerElm)
+{
+    var files = filePickerElm.files;
+  
+    if (files.length == 0)
+    {
+        return;
+    }
+    
+    var file = files[0];
+    localStorage.setItem("LoadedFile", filePickerElm);
+    
+    let reader = new FileReader();
+  
+    reader.onload = function(e)
+    {
+        var file = e.target.result;
+  
+        // This is a regular expression to identify carriage 
+        // Returns and line breaks
+        var lines = file.split(/\r\n|\n/);
+        var text = lines.join('\n');
+
+        // alert(text);
+        xml = parser.parseFromString(text, "text/xml");
+        parseXML();
+    };
+  
+    reader.onerror = (e) => alert(e.target.error.name);
+  
+    reader.readAsText(file);
+}
+
+document.querySelector(".blackoutModal div button").onclick = function()
+{
+    loadFile(document.querySelector(".blackoutModal div input"));
+    document.querySelector(".blackoutModal").style.display = 'none';
+}
+
+document.querySelector(".editHeadder.weapons").onclick = function()
+{
+    var editButtonsDiv = document.querySelector('.contentEditable.weapons');
+    editButtonsDiv.style.display = 'block';
+    var weaponsTable = document.querySelector('#weaponsTable');
+    weaponsTable.setAttribute("contenteditable", 'true');
+
+    var addedRows = [];
+    for (let i = 1; i < weaponsTable.children.length; i++) 
+    {
+        var row = weaponsTable.children[i];
+        row.children[1].innerHTML = row.getAttribute("data-indexID");
+        row.removeAttribute("data-indexID");
+        row.onclick = null;
+
+        row.style.cursor = 'text';
+        
+        var td = addTD(row, "⛔");
+        td.style.cursor = 'pointer';
+        td.onclick = function()
+        {
+            this.parentElement.remove();
+        };
+
+        addedRows[addedRows.length] = row;
+    }
+
+    editButtonsDiv.children[0].onclick = function()
+    {
+        var row = document.createElement('tr');
+        weaponsTable.appendChild(row);
+        row.classList.add("rollable");
+        row.style.cursor = 'text';
+
+        addTD(row, "New Weapon");
+        addTD(row, "Skill ID");
+        addTD(row, "Damage");
+        addTD(row, "Crit");
+        addTD(row, "Range");
+        addTD(row, "Special");
+
+        var td = addTD(row, "⛔");
+        td.style.cursor = 'pointer';
+        td.onclick = function()
+        {
+            this.parentElement.remove();
+        };
+
+        addedRows[addedRows.length] = row;
+    }
+
+    editButtonsDiv.children[1].onclick = function()
+    {
+        var xmlWeapons = xml.getElementsByTagName("weapon");
+        for (let i = xmlWeapons.length - 1; i > -1; i--) 
+        {
+            var elm = xmlWeapons[i];
+            elm.remove();
+        }
+
+        for (let i = 0; i < addedRows.length; i++) 
+        {
+            var row = addedRows[i];
+            var num = parseInt(row.children[1].innerHTML, 10);
+            var skillName = skillNames[num];
+            row.children[1].innerHTML = skillName;
+            row.setAttribute("data-indexID", num);
+
+            row.children[row.children.length - 1].remove();
+
+            row.style.cursor = "";
+            
+            row.onclick = function(e)
+            {
+                var foo = this.getAttribute("data-indexID"); 
+                showRollPopup(e, foo);
+            };
+
+            var xmlement = xml.createElement("weapon");
+            xml.getElementsByTagName('inventory')[0].appendChild(xmlement);
+            xmlement.innerHTML = row.children[0].innerHTML;
+            xmlement.setAttribute("skillID", row.children[1].innerHTML);
+            xmlement.setAttribute("damage", row.children[2].innerHTML);
+            xmlement.setAttribute("crit", row.children[3].innerHTML);
+            xmlement.setAttribute("range", row.children[4].innerHTML);
+            xmlement.setAttribute("properties", row.children[5].innerHTML);
+        }
+
+        editButtonsDiv.style.display = 'none';
+        weaponsTable.setAttribute("contenteditable", 'false');
+    }
+}
