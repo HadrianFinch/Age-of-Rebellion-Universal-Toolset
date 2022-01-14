@@ -14,7 +14,7 @@
         <div>
             <h1>Select Character</h1>
             <input type="file"><br><br>
-            <button>Play</button>
+            <button>Create Black Character</button>
             <br><b style="color: red;"></b>
         </div>
     </div>
@@ -193,7 +193,7 @@
                         <th class="editHeadder weapons">edit</th>
                     </tr>
                     <tr>
-                        
+                
                     </tr>
                 </table>
                 <div class="contentEditable weapons">
@@ -275,17 +275,18 @@
                 <hr>
                 <div>
                     <table id="equipment-table">
-                        <tr>
+                        <tr contenteditable="false">
                             <th>Name</th>
                             <th>Quick Info</th>
                             <th>Page #</th>
+                            <th class="editHeadder equipment">edit</th>
                         </tr>
                     </table>
+                    <div class="contentEditable equipment">
+                        <button class="addRow">+</button><button class="saveChanges">Save Changes</button>
+                    </div>
                     <br>
                 </div>
-                <h3 style="color: var(--themecolor);">Other Items</h3>
-                <hr>
-                <textarea onkeyup="saveOtherItems()" id="inventory-otherItems" placeholder="Put your other items here"></textarea>
             </div>
             
             <div id="SkillsTallents" class="tabcontent">

@@ -97,26 +97,9 @@ function init()
     else
     {        
         strain[1] = localStorage.getItem("currentStrain");
-    }
-
-    if (localStorage.getItem("credits") == 'null')
-    {
-        credits = 0;        
-    }
-    else
-    {        
-        credits = localStorage.getItem("credits");
-        creditsBox.value = credits;
-    }
-
-    if (localStorage.getItem("otherItems") == 'null')
-    {
-    }
-    else
-    {        
-        document.querySelector("#inventory-otherItems").innerHTML = localStorage.getItem("otherItems");
-    }
-
+    }   
+    creditsBox.value = credits;
+    
     if (localStorage.getItem("xp_0") == 'null')
     {     
         xp[0] = 0;
@@ -124,15 +107,6 @@ function init()
     else
     {        
         xp[0] = localStorage.getItem("xp_0");
-    }
-
-    if (localStorage.getItem("xp_1") == null)
-    {     
-        xp[1] = 0;
-    }
-    else
-    {        
-        xp[1] = localStorage.getItem("xp_1");
     }
 
     if (localStorage.getItem("themeColor") == null)
@@ -584,10 +558,11 @@ function strainDamage()
     textboxEditEnd(strainCurrent, strain[1]);
 }
 
+creditsBox.onkeyup = saveCredits;
 function saveCredits()
 {
     credits = creditsBox.value;
-    localStorage.setItem("credits", credits);
+    xml.getElementsByTagName('credits')[0].innerHTML = credits;
 }
 
 function saveOtherItems()
@@ -801,14 +776,21 @@ function parseXML()
     wounds[0] = (parseInt(wounds[0], 10) + woundMod);
     strain[0] = (parseInt(strain[0], 10) + strainMod);
 
+    credits = xml.getElementsByTagName('credits')[0].innerHTML;
+
     init();
 }
-
+var xmlFileName;
 document.querySelector('.exportXML').onclick = exportXML;
 function exportXML()
 {
     var blob = new Blob([(new XMLSerializer).serializeToString(xml)], {type: "application/xhtml+xml;charset=" + document.characterSet});
-    saveAs(blob,  characterName + ".xml");
+    var a = document.createElement("a");
+    a.download = xmlFileName;
+    a.href = URL.createObjectURL(blob);
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
 }
 
 function loadFile(filePickerElm)
@@ -821,6 +803,7 @@ function loadFile(filePickerElm)
     }
     
     var file = files[0];
+    xmlFileName = file.name;
     localStorage.setItem("LoadedFile", filePickerElm);
     
     let reader = new FileReader();
@@ -844,9 +827,14 @@ function loadFile(filePickerElm)
     reader.readAsText(file);
 }
 
-document.querySelector(".blackoutModal div button").onclick = function()
+document.querySelector(".blackoutModal div input").onchange = function()
 {
     loadFile(document.querySelector(".blackoutModal div input"));
+    document.querySelector(".blackoutModal").style.display = 'none';
+}
+
+document.querySelector(".blackoutModal div button").onchange = function()
+{
     document.querySelector(".blackoutModal").style.display = 'none';
 }
 
@@ -940,5 +928,71 @@ document.querySelector(".editHeadder.weapons").onclick = function()
 
         editButtonsDiv.style.display = 'none';
         weaponsTable.setAttribute("contenteditable", 'false');
+    }
+}
+
+document.querySelector(".editHeadder.equipment").onclick = function()
+{
+    var editButtonsDiv = document.querySelector('.contentEditable.equipment');
+    editButtonsDiv.style.display = 'block';
+    var equipmentTable = document.querySelector('#equipment-table');
+    equipmentTable.setAttribute("contenteditable", 'true');
+
+    for (let i = 1; i < equipmentTable.children.length; i++) 
+    {
+        var row = equipmentTable.children[i];
+        row.style.cursor = 'text';
+        
+        var td = addTD(row, "⛔");
+        td.style.cursor = 'pointer';
+        td.onclick = function()
+        {
+            this.parentElement.remove();
+        };
+    }
+
+    editButtonsDiv.children[0].onclick = function()
+    {
+        var row = document.createElement('tr');
+        equipmentTable.appendChild(row);
+        row.style.cursor = 'text';
+
+        addTD(row, "New Item");
+        addTD(row, "Info");
+        addTD(row, "Page");
+
+        var td = addTD(row, "⛔");
+        td.style.cursor = 'pointer';
+        td.onclick = function()
+        {
+            this.parentElement.remove();
+        };
+    }
+
+    editButtonsDiv.children[1].onclick = function()
+    {
+        var xmlItems = xml.getElementsByTagName("item");
+        for (let i = xmlItems.length - 1; i > -1; i--) 
+        {
+            var elm = xmlItems[i];
+            elm.remove();
+        }
+
+        for (let i = 1; i < equipmentTable.children.length; i++) 
+        {
+            var row = equipmentTable.children[i];
+            row.children[row.children.length - 1].remove();
+
+            row.style.cursor = "";
+            
+            var xmlement = xml.createElement("item");
+            xml.getElementsByTagName('inventory')[0].appendChild(xmlement);
+            xmlement.setAttribute("name", row.children[0].innerHTML);
+            xmlement.setAttribute("quickNotes", row.children[1].innerHTML);
+            xmlement.setAttribute("page", row.children[2].innerHTML);
+        }
+
+        editButtonsDiv.style.display = 'none';
+        equipmentTable.setAttribute("contenteditable", 'false');
     }
 }
