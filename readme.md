@@ -5,7 +5,9 @@ The Age of Rebellion Universal Toolset is a webpage meant to assist players with
 ## Installation
 
 Download the latest GitHub release and open index.html
+
 --Or--
+
 Go to [content.hadrianfinch.com/AoRUniversalToolset/index.html](content.hadrianfinch.com/AoRUniversalToolset/index.html)
 
 
