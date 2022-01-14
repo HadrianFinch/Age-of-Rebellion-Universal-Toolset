@@ -1,8 +1,18 @@
+
+function removeAllChildNodes(parent) 
+{
+    while (parent.firstChild) 
+    {
+        parent.removeChild(parent.firstChild);
+    }
+}
+
 function rollFake()
 {
     console.log("rolling fake dice pool");
     roll({setback: 0, boost: 0, ability: 1, dificulty: 2, proficency: 3, challenge: 1});
 }
+rollerInit();
 
 function roll(pool)
 {
@@ -331,7 +341,7 @@ var currentSkillSelected = -1;
 
 function displayRollResult(results)
 {
-    var time = 1
+    var time = 1;
     if (document.querySelector(".diceResult").style.right != "-300pt") 
     {
         document.querySelector(".diceResult").style.animationPlayState = 'paused';
@@ -445,4 +455,97 @@ function displayRollResult(results)
         }, 500); // the time of the animation
     
     }, time); // the time of the animation
+}
+
+var diceRoller = document.getElementById('diceRoller');
+diceRoller.onclick = function(){toggelDiceRoller(true)};
+document.querySelector('#diceRoller div.close').onclick = function(e){e.stopPropagation(); toggelDiceRoller(false);};
+
+function toggelDiceRoller(toggel)
+{
+    if (toggel == true)
+    {
+        diceRoller.classList.add("active");
+    }
+    else
+    {
+        diceRoller.classList.remove("active");
+        if (document.querySelector('#diceRoller div.close').classList.contains("active") == true) 
+        {
+            rollPool();
+        }
+        
+        var b = document.querySelectorAll('#diceRoller div b');
+        for (let i = 0; i < b.length; i++) 
+        {
+            const elm = b[i];
+            elm.innerHTML = "0";
+        }
+    }
+
+}
+
+function rollerInit()
+{
+    document.querySelector(".diceResult").style.right = "-300pt";
+
+    var elms = document.querySelectorAll("#diceRoller div");
+    for (let i = 0; i < (elms.length - 1); i++) 
+    {
+        const elm = elms[i];
+        elm.onclick = function(){incrimentDice(this);};
+    }    
+}
+
+function incrimentDice(elm)
+{
+    elm.children[1].innerHTML = (parseInt(elm.children[1].innerHTML, 10) + 1);
+    var btn = document.querySelector('#diceRoller div.close');
+    btn.classList.add('active');
+    btn.children[0].innerHTML = "Roll";
+}
+
+function rollPool()
+{
+    var pool = [];
+
+    var b = document.querySelectorAll('#diceRoller div b');
+    for (let i = 0; i < b.length; i++) 
+    {
+        const elm = b[i];
+
+        if (i == 0) 
+        {
+            pool.ability = elm.innerHTML;
+        }
+        if (i == 1) 
+        {
+            pool.proficency = elm.innerHTML;
+        }
+        if (i == 2) 
+        {
+            pool.boost = elm.innerHTML;
+        }
+        if (i == 3) 
+        {
+            pool.dificulty = elm.innerHTML;
+        }
+        if (i == 4)
+        {
+            pool.challenge = elm.innerHTML;
+        }
+        if (i == 5) 
+        {
+            pool.setback = elm.innerHTML;
+        }
+    }
+
+    currentSkillSelected = -1;
+
+    var btn = document.querySelector('#diceRoller div.close');
+    btn.children[0].innerHTML = "❌";
+    btn.classList.remove("active");
+
+    var result = roll(pool);
+    displayRollResult(result);
 }

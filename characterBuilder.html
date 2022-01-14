@@ -1,15 +1,82 @@
 <!DOCTYPE html>
 <html>
-    <script src="js/dice.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+<head>       
+    <link rel="stylesheet" type="text/css" href="css/global.css">
+    <link rel="stylesheet" type="text/css" href="css/character-builder.css">
     <link rel="stylesheet" type="text/css" href="css/animation.css">
     <title>Character Builder</title>
-<head>
-
 </head>
 
 <body>
+    <div class="pagecontainer">
+        <div class="topBox">
+            
+        </div>
+        <div class="mainBox">
+            <div class="tab">
+                <button class="tablinks" id="defaultOpen" onclick="openTab(event, 'General')">General</button>
+                <button class="tablinks" onclick="openTab(event, 'Race')">Race</button>
+                <button class="tablinks" onclick="openTab(event, 'SkillsTallents')">Skills & Tallents</button>
+                <button class="tablinks" onclick="openTab(event, 'Ships&Vehicles')">Ships & Vehicles</button>
+                <!-- <button class="tablinks" onclick="openTab(event, 'Information')">Information</button> -->
+                <!-- <button class="tablinks" onclick="openTab(event, 'Notes')">Notes</button> -->
+                <button class="tablinks" onclick="openTab(event, 'Settings')">Settings</button>
+            </div>
+            
+            <div id="General" class="tabcontent">
+                <h3 style="color: var(--themecolor);">Actions</h3>
+                <hr>
+                
+            </div>
+        </div>
+    </div>
 
+    <div class="diceResult">
+        <b>Custom Roll</b>
+        <div>
+
+        </div>
+        <b>Results:</b>
+        <p></p>
+    </div>
+
+    <div id="diceRoller">
+        <div>
+            <h1 class="dimond" style="color: var(--abilityColor);">♦</h1>
+            <b>0</b>
+        </div>
+        <div>
+            <h1 style="color: var(--proficencyColor);">⬢</h1>
+            <b>0</b>
+        </div>
+        <div>
+            <h1 class="square" style="color: var(--boostColor);">■</h1>
+            <b>0</b>
+        </div>
+        
+        <br>
+
+        <div>
+            <h1 class="dimond" style="color: var(--dificultyColor);">♦</h1>
+            <b>0</b>
+        </div>
+        <div>
+            <h1 style="color: var(--challengeColor);">⬢</h1>
+            <b>0</b>
+        </div>
+        <div>
+            <h1 class="square" style="color: var(--setbackColor);">■</h1>
+            <b>0</b>
+        </div>
+
+        <br>
+        <div class="close">
+            <h1 class="close">❌</h1>
+        </div>
+    </div>
+    
+    <script src="js/dice.js"></script>
+    <script src="js/character-builder.js"></script>
 </body>
 
 </html>

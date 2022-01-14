@@ -27,8 +27,7 @@ var xp = [0, 0];
 var characterName = "AoR Character Sheets"
 
 // Define Constants
-var skillAbilitys = 
-[abilitys[2],abilitys[0],abilitys[5],abilitys[4],abilitys[2],abilitys[5],abilitys[1],abilitys[3],abilitys[4],abilitys[5],abilitys[2],abilitys[2],abilitys[5],abilitys[3],abilitys[1],abilitys[1],abilitys[0],abilitys[3],abilitys[1],abilitys[3],abilitys[3],abilitys[4],abilitys[0],abilitys[1],abilitys[0],abilitys[1],abilitys[1],abilitys[2],abilitys[2],abilitys[2],abilitys[2],abilitys[2],abilitys[2],abilitys[2]]
+var skillAbilitys = [];
 var skillNames = 
 [
     "Astrogation (Int)","Athletics (Br)","Charm (Pr)","Coercion (Will)","Computers (Int)","Cool (Pr)","Coordination (Ag)","Deception (Cun)","Discipline (Will)", "Leadership (Pr)","Mechanics (Int)","Medicine (Int)","Negotiaion (Pr)","Perception (Cun)","Piloting - Planetary (Ag)","Piloting - Space (Ag)","Resilience (Br)",         "Skulduggery (Cun)",      "Stealth (Ag)",           "Streetwise (Cun)",        "Survival (Cun)",          "Vigilance (Will)",   "Brawl (Br)","Gunnery (Ag)","Melee (Br)","Ranged - Light (Ag)","Ranged - Heavy (Ag)","Core Worlds (Int)","Education (Int)","Lore (Int)","Outer Rim (Int)","Underworld (Int)","Warfare (Int)","Xenology (Int)"
@@ -125,7 +124,7 @@ function init()
         setBackgroundImage(localStorage.getItem("backgroundImage"));
         document.querySelector("#backgroundImagePicker").value = localStorage.getItem("themeColor");
     }
-
+    skillAbilitys = [abilitys[2],abilitys[0],abilitys[5],abilitys[4],abilitys[2],abilitys[5],abilitys[1],abilitys[3],abilitys[4],abilitys[5],abilitys[2],abilitys[2],abilitys[5],abilitys[3],abilitys[1],abilitys[1],abilitys[0],abilitys[3],abilitys[1],abilitys[3],abilitys[3],abilitys[4],abilitys[0],abilitys[1],abilitys[0],abilitys[1],abilitys[1],abilitys[2],abilitys[2],abilitys[2],abilitys[2],abilitys[2],abilitys[2],abilitys[2]];
     var skillboxes = document.querySelectorAll(".skillsList li");
     var rollPopup = document.querySelector('#rollPopup');
     document.querySelector('title').innerHTML = characterName;
@@ -208,8 +207,6 @@ function init()
     
     document.querySelector('.box2 div h1').innerHTML = strain[1];
     document.querySelector('.box2 div h1[class="2"]').innerHTML = strain[0];
-    
-    document.querySelector(".diceResult").style.right = "-300pt";
 
     document.querySelector(".applyThemeColor").onclick = function()
     {
@@ -227,7 +224,6 @@ function init()
     {
         window.open("diceRoller.html", "", "width=600,height=785")
     };
-    rollerInit();
 }
 var mouseOverRollPopup = false;
 
@@ -290,7 +286,7 @@ function rollCheck()
     displayRollResult(results);
 }
 
-function openTab(evt, cityName) 
+function openTab(evt, cityName)
 {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
@@ -305,14 +301,6 @@ function openTab(evt, cityName)
     }
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
-}
-
-function removeAllChildNodes(parent) 
-{
-    while (parent.firstChild) 
-    {
-        parent.removeChild(parent.firstChild);
-    }
 }
 
 healthInit();
@@ -461,97 +449,6 @@ function setBackgroundImage(image)
 {
     document.querySelector('body').style.backgroundImage = ("url(" + image + ")");
     localStorage.setItem("backgroundImage", image);
-}
-
-var diceRoller = document.getElementById('diceRoller');
-diceRoller.onclick = function(){toggelDiceRoller(true)};
-document.querySelector('#diceRoller div.close').onclick = function(e){e.stopPropagation(); toggelDiceRoller(false);};
-
-function toggelDiceRoller(toggel)
-{
-    if (toggel == true)
-    {
-        diceRoller.classList.add("active");
-    }
-    else
-    {
-        diceRoller.classList.remove("active");
-        if (document.querySelector('#diceRoller div.close').classList.contains("active") == true) 
-        {
-            rollPool();
-        }
-        
-        var b = document.querySelectorAll('#diceRoller div b');
-        for (let i = 0; i < b.length; i++) 
-        {
-            const elm = b[i];
-            elm.innerHTML = "0";
-        }
-    }
-
-}
-
-function rollerInit()
-{
-    var elms = document.querySelectorAll("#diceRoller div");
-    for (let i = 0; i < (elms.length - 1); i++) 
-    {
-        const elm = elms[i];
-        elm.onclick = function(){incrimentDice(this);};
-    }
-}
-
-function incrimentDice(elm)
-{
-    elm.children[1].innerHTML = (parseInt(elm.children[1].innerHTML, 10) + 1);
-    var btn = document.querySelector('#diceRoller div.close');
-    btn.classList.add('active');
-    btn.children[0].innerHTML = "Roll";
-}
-
-function rollPool()
-{
-    var pool = [];
-
-    var b = document.querySelectorAll('#diceRoller div b');
-    for (let i = 0; i < b.length; i++) 
-    {
-        const elm = b[i];
-
-        if (i == 0) 
-        {
-            pool.ability = elm.innerHTML;
-        }
-        if (i == 1) 
-        {
-            pool.proficency = elm.innerHTML;
-        }
-        if (i == 2) 
-        {
-            pool.boost = elm.innerHTML;
-        }
-        if (i == 3) 
-        {
-            pool.dificulty = elm.innerHTML;
-        }
-        if (i == 4)
-        {
-            pool.challenge = elm.innerHTML;
-        }
-        if (i == 5) 
-        {
-            pool.setback = elm.innerHTML;
-        }
-    }
-
-    currentSkillSelected = -1;
-
-    var btn = document.querySelector('#diceRoller div.close');
-    btn.children[0].innerHTML = "❌";
-    btn.classList.remove("active");
-
-    var result = roll(pool);
-    displayRollResult(result);
 }
 
 var apply = document.querySelector('.characterSelectorApply');
