@@ -434,11 +434,6 @@ function saveCredits()
     xml.getElementsByTagName('credits')[0].innerHTML = credits;
 }
 
-function saveOtherItems()
-{
-    localStorage.setItem("otherItems", (document.querySelector("#inventory-otherItems").value));
-}
-
 function setThemeColor(color)
 {
     document.querySelector(':root').style.setProperty('--themecolor', color);
@@ -611,9 +606,9 @@ document.querySelector(".blackoutModal div input").onchange = function()
     document.querySelector(".blackoutModal").style.display = 'none';
 }
 
-document.querySelector(".blackoutModal div button").onchange = function()
+document.querySelector(".blackoutModal div button").onclick = function()
 {
-    document.querySelector(".blackoutModal").style.display = 'none';
+    document.location.href = "characterBuilder.html";
 }
 
 document.querySelector(".editHeadder.weapons").onclick = function()

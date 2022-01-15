@@ -22,7 +22,9 @@
     outline: none;
     cursor: pointer;
     padding: 3pt;
-    margin: 5pt;
+    margin: 2pt;
+    margin-top: 5pt;
+    margin-bottom: 5pt;
     transition: 0.3s;
     font-size: 15px;
 
@@ -100,4 +102,47 @@
     border-width: 1pt;
     border-radius: 5pt;
     box-shadow: 0pt 8pt 16pt 0pt #00000033;
+    text-align: left;
+}
+
+.topBox input[type="text"]
+{
+    font-size: 12pt;
+    /* font-weight: bold; */
+    border: 1pt solid #7f7f7f;
+    margin-bottom: 0pt;
+}
+
+.topBox *
+{
+    margin: 5pt;
+    height: 18pt;
+    border-radius: 3pt;
+}
+
+.saveBtn
+{
+    position: absolute;
+
+    top: 660pt;
+    right: 10pt;
+
+    width: 70pt;
+    height: 25pt;
+    text-align: center;
+
+    background-color: var(--forground1);
+    border: 1pt solid var(--themecolor);
+    border-radius: 5pt;
+}
+
+.saveBtn:hover
+{
+    background-color: var(--forground1-hover);
+}
+
+.saveBtn h2
+{
+    position: relative;
+    margin: 3.5pt;
 }

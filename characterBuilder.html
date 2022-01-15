@@ -10,17 +10,22 @@
 <body>
     <div class="pagecontainer">
         <div class="topBox">
-            
+            <h1>Character Builder</h1>
+            <input type="text" placeholder="Character Name" autocomplete="none" spellcheck="false">
+            <br><b style="color: var(--themecolor);">Theme Color</b> <input type="color">
+            <!-- <span>    |    </span> -->
         </div>
         <div class="mainBox">
             <div class="tab">
                 <button class="tablinks" id="defaultOpen" onclick="openTab(event, 'General')">General</button>
-                <button class="tablinks" onclick="openTab(event, 'Race')">Race</button>
-                <button class="tablinks" onclick="openTab(event, 'SkillsTallents')">Skills & Tallents</button>
-                <button class="tablinks" onclick="openTab(event, 'Ships&Vehicles')">Ships & Vehicles</button>
-                <!-- <button class="tablinks" onclick="openTab(event, 'Information')">Information</button> -->
-                <!-- <button class="tablinks" onclick="openTab(event, 'Notes')">Notes</button> -->
-                <button class="tablinks" onclick="openTab(event, 'Settings')">Settings</button>
+                <button class="tablinks" onclick="openTab(event, 'Species')">1. Species</button>
+                <button class="tablinks" onclick="openTab(event, 'Career')">2. Career</button>
+                <button class="tablinks" onclick="openTab(event, 'Specializations')">3. Specializations</button>
+                <button class="tablinks" onclick="openTab(event, 'Duty')">4. Duty</button>   
+                <button class="tablinks" onclick="openTab(event, 'SpendXP')">5. Spend XP</button>
+                <button class="tablinks" onclick="openTab(event, 'Gear')">6. Gear</button>
+                <!-- <button class="tablinks" onclick="openTab(event, 'Specializations')">7. Aquire Rebellion Resources</button> -->
+                <button disabled class="playBtn tablinks">Play</button>
             </div>
             
             <div id="General" class="tabcontent">
@@ -28,6 +33,45 @@
                 <hr>
                 
             </div>
+            
+            <div id="Species" class="tabcontent">
+                <h3 style="color: var(--themecolor);">Pick a Species</h3>
+                <hr>
+                
+            </div>
+            
+            <div id="Career" class="tabcontent">
+                <h3 style="color: var(--themecolor);">Select a Career</h3>
+                <hr>
+                
+            </div>
+            
+            <div id="Specializations" class="tabcontent">
+                <h3 style="color: var(--themecolor);">Choose Specializations</h3>
+                <hr>
+                
+            </div>
+            
+            <div id="Duty" class="tabcontent">
+                <h3 style="color: var(--themecolor);">Manage Duty</h3>
+                <hr>
+                
+            </div>
+            
+            <div id="SpendXP" class="tabcontent">
+                <h3 style="color: var(--themecolor);">Increase Abilitys</h3>
+                <hr>
+                
+            </div>
+            
+            <div id="Gear" class="tabcontent">
+                <h3 style="color: var(--themecolor);">Manage Gear</h3>
+                <hr>
+                
+            </div>
+        </div>
+        <div class="saveBtn">
+            <h2>SAVE</h2>
         </div>
     </div>
 
@@ -75,6 +119,7 @@
         </div>
     </div>
     
+    <script src="js/game.js"></script>
     <script src="js/dice.js"></script>
     <script src="js/character-builder.js"></script>
 </body>
