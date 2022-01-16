@@ -33,9 +33,9 @@ class Species
         this.m_willpower = willpower;
         this.m_presence = presence;
 
-        this.m_special[0] = special1;
-        this.m_special[1] = special2;
-        this.m_special[2] = special3;
+        // this.m_special[0] = special1;
+        // this.m_special[1] = special2;
+        // this.m_special[2] = special3;
     }
 
     get brawn()
@@ -71,6 +71,13 @@ class Species
 
 const Duros = new Species(
     'Duros',
-    '',
-    
+    'Description',
+    11,
+    10,
+    100,
+
+    1,2,3,2,2,2,
+    'Start with one rank in Piloting (Space)'
 );
+
+
