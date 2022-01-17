@@ -26,7 +26,7 @@
     margin-top: 5pt;
     margin-bottom: 5pt;
     transition: 0.3s;
-    font-size: 15pt;
+    font-size: 11pt;
 
     border-bottom-style: solid;
     border-bottom-color: #00000000;
@@ -136,21 +136,6 @@
     border-radius: 5pt;
     cursor: pointer;
     user-select: none;
-}
-
-.saveBtn:hover
-{
-    background-color: var(--forground1-hover);
-}
-
-.saveBtn:active
-{
-    background-color: var(--forground1);
-}
-.saveBtn h2
-{
-    position: relative;
-    margin: 3.5pt;
 }
 
 select
