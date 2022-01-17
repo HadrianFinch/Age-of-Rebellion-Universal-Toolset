@@ -161,7 +161,7 @@ ul[class="skillsList"] li:hover
     padding: 3pt;
     margin: 5pt;
     transition: 0.3s;
-    font-size: 15px;
+    font-size: 15pt;
 
     border-bottom-style: solid;
     border-bottom-color: #00000000;
@@ -677,7 +677,7 @@ td
 
 [contenteditable]
 {
-    outline: 0px solid transparent;
+    outline: 0pt solid transparent;
 }
 
 .contentEditable

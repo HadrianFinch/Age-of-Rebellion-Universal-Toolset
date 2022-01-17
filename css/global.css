@@ -4,7 +4,8 @@
     --forground1: #b8b8b8;
     --forground1-hover: #919191;
     --forground2: #cacaca;
-    --forground2-hover: #acacac;
+    --forground2-hover: #bebebe;
+    --forground3: #d8d8d8;
 
     --boostColor: #0038ee;
     --setbackColor: black;
@@ -97,7 +98,8 @@ body
 
     position: absolute;
     left: 50%;
-    transform: translate(-50%, 0%);
+    top: 50%;
+    transform: translate(-50%, -50%);
     /* background-color: #d8d8d8; */
 }
 
@@ -235,4 +237,9 @@ body
 .diceResult b, .diceResult p
 {
     margin: 2pt;
+}
+
+.hidden
+{
+    display: none;
 }
