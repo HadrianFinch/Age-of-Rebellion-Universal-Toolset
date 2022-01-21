@@ -65,3 +65,15 @@ document.querySelector('#Species select').oninput = function()
 
     document.querySelector('#' + this.value).style.display = 'block';
 }
+
+document.querySelector('#Career select').oninput = function()
+{
+    var elms = document.querySelectorAll("div.careerOption");
+    for (let i = 0; i < elms.length; i++)
+    {
+        var elm = elms[i];
+        elm.style.display = null;
+    }
+
+    document.querySelector('#' + this.value).style.display = 'block';
+}
