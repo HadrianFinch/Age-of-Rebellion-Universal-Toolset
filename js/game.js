@@ -80,4 +80,5 @@ const Duros = new Species(
     'Start with one rank in Piloting (Space)'
 );
 
-
+var Ace = [];
+Ace.carreerSkills = [];

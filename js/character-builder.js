@@ -76,4 +76,7 @@ document.querySelector('#Career select').oninput = function()
     }
 
     document.querySelector('#' + this.value).style.display = 'block';
+
+    // Set Specializations
+    
 }
