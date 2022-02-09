@@ -81,4 +81,37 @@ const Duros = new Species(
 );
 
 var Ace = [];
-Ace.carreerSkills = [];
+Ace.carreerSkills = [0, 5, 23, 10, 13, 14, 15, 25];
+Ace.specializations = 
+[
+    {
+        name: 'Driver',
+        additionalCareerSkills: [5, 23, 10, 14]
+    },
+    {
+        name: 'Gunner',
+        additionalCareerSkills: [8, 23, 26, 16]
+    },
+    {
+        name: 'Pilot',
+        additionalCareerSkills: [0, 23, 14, 15]
+    }
+];
+
+var Commander = [];
+Commander.carreerSkills = [3, 5, 8, 32, 9, 13, 25, 21];
+Commander.specializations = 
+[
+    {
+        name: 'Commodore',
+        additionalCareerSkills: [0, 4, 28, 30]
+    },
+    {
+        name: 'Squadron Leader',
+        additionalCareerSkills: [23, 10, 14, 15]
+    },
+    {
+        name: 'Tactician',
+        additionalCareerSkills: [22, 7, 9, 26]
+    }
+];
