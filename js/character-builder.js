@@ -1,3 +1,13 @@
+function removeAllChildNodes(parent) 
+{
+    while (parent.firstChild) 
+    {
+        parent.removeChild(parent.firstChild);
+    }
+}
+
+var character = {};
+
 init();
 function init()
 {
@@ -64,6 +74,40 @@ document.querySelector('#Species select').oninput = function()
     }
 
     document.querySelector('#' + this.value).style.display = 'block';
+    
+    // Update Character
+    if (this.value == 'Bothan') 
+    {
+        character.species = Bothan;
+    }
+    else if (this.value == 'Droid')
+    {
+        character.species = Droid;
+    }
+    else if (this.value == 'Duros')
+    {
+        character.species = Duros;
+    }
+    else if (this.value == 'Gran')
+    {
+        character.species = Gran;
+    }
+    else if (this.value == 'Human')
+    {
+        character.species = Human;
+    }
+    else if (this.value == 'Ithorian')
+    {
+        character.species = Ithorian;
+    }
+    else if (this.value == 'MonCalamari')
+    {
+        character.species = MonCalamari;
+    }
+    else if (this.value == 'Sullustan')
+    {
+        character.species = Sullustan;
+    }
 }
 
 document.querySelector('#Career select').oninput = function()
@@ -78,5 +122,57 @@ document.querySelector('#Career select').oninput = function()
     document.querySelector('#' + this.value).style.display = 'block';
 
     // Set Specializations
-    
+    var careerGroup = document.querySelector('optgroup[label="Career Specializations"]');
+    var nonCareerGroup = document.querySelector('optgroup[label="Non-Career Specializations"]');
+
+    if (this.value == 'Ace')
+    {
+        character.career = Ace;
+    }
+    else if (this.value == 'Commander')
+    {
+        character.career = Diplomat;
+    }
+    else if (this.value == 'Diplomat')
+    {
+        character.career = Diplomat;
+    }
+    else if (this.value == 'Engineer')
+    {
+        character.career = Engineer;
+    }
+    else if (this.value == 'Soldier')
+    {
+        character.career = Soldier;
+    }
+    else if (this.value == 'Spy')
+    {
+        character.career = Spy;
+    }
+    else if (this.value == 'Recruit')
+    {
+        character.career = Recruit;
+    }
+    var career = character.career;
+
+    removeAllChildNodes(careerGroup);
+    removeAllChildNodes(nonCareerGroup);
+
+    // Add the options
+    for (let i = 0; i < career.specializations.length; i++) 
+    {
+        var elm = career.specializations[i];
+
+        var opt = document.createElement('option');
+        opt.value = elm.name;
+        opt.innerHTML = elm.name;
+
+        careerGroup.appendChild(opt);
+    }
+};
+
+
+function updateCharacter()
+{
+
 }

@@ -7,33 +7,21 @@ var strain = [10, 0];
 var deffense = [0, 0];
 var weapons = 
 [
-    ["Shock Prod", 22, 0, 5, "Engaged", "Stun 3"],
-    ["Fusion Cutter", 22, 5, 3, "Engaged", "Breach 1, Burn 3, Vicious 3"]
+    ["Shock Prod", 22, 0, 5, "Engaged", "Stun 3"]
 ];
 var equipment = 
 [
-    ["Commlink", "handheld", "186"],
-    ["Fusion Cutter", "Can me used as weapon", "197"],
-    ["Circular Saw", "", ""],
-    ["Fire Extinguisher", "Doubles as smokescreen", ""],
-    ["Electrobinoculars", "-<span class=\"setbackIcon\"></span> on Perception checks", "190"],
-    ["Toolkit", "", "198"],
-    ["Liquid-Cable Launcher", "+<span class=\"boostIcon\"></span> on climbing", ""],
-    ["Liquid-Cable Launcher", "+<span class=\"boostIcon\"></span> on climbing", ""],
-    ["Periscope", "", ""]
+    ["Commlink", "handheld", "186"]
 ];
 var credits = 0;
 var xp = [0, 0];
 var characterName = "AoR Character Sheets"
 
+var creditsBox = document.querySelector("#Inventory input");
+
 // Define Constants
 var skillAbilitys = [];
-var skillNames = 
-[
-    "Astrogation (Int)","Athletics (Br)","Charm (Pr)","Coercion (Will)","Computers (Int)","Cool (Pr)","Coordination (Ag)","Deception (Cun)","Discipline (Will)", "Leadership (Pr)","Mechanics (Int)","Medicine (Int)","Negotiaion (Pr)","Perception (Cun)","Piloting - Planetary (Ag)","Piloting - Space (Ag)","Resilience (Br)",         "Skulduggery (Cun)",      "Stealth (Ag)",           "Streetwise (Cun)",        "Survival (Cun)",          "Vigilance (Will)",   "Brawl (Br)","Gunnery (Ag)","Melee (Br)","Ranged - Light (Ag)","Ranged - Heavy (Ag)","Core Worlds (Int)","Education (Int)","Lore (Int)","Outer Rim (Int)","Underworld (Int)","Warfare (Int)","Xenology (Int)"
-];
-
-var creditsBox = document.querySelector("#Inventory input");
+skillAbilitys = [abilitys[2],abilitys[0],abilitys[5],abilitys[4],abilitys[2],abilitys[5],abilitys[1],abilitys[3],abilitys[4],abilitys[5],abilitys[2],abilitys[2],abilitys[5],abilitys[3],abilitys[1],abilitys[1],abilitys[0],abilitys[3],abilitys[1],abilitys[3],abilitys[3],abilitys[4],abilitys[0],abilitys[1],abilitys[0],abilitys[1],abilitys[1],abilitys[2],abilitys[2],abilitys[2],abilitys[2],abilitys[2],abilitys[2],abilitys[2]];
 
 function addTD(parent, value)
 {
@@ -124,7 +112,7 @@ function init()
         setBackgroundImage(localStorage.getItem("backgroundImage"));
         document.querySelector("#backgroundImagePicker").value = localStorage.getItem("themeColor");
     }
-    skillAbilitys = [abilitys[2],abilitys[0],abilitys[5],abilitys[4],abilitys[2],abilitys[5],abilitys[1],abilitys[3],abilitys[4],abilitys[5],abilitys[2],abilitys[2],abilitys[5],abilitys[3],abilitys[1],abilitys[1],abilitys[0],abilitys[3],abilitys[1],abilitys[3],abilitys[3],abilitys[4],abilitys[0],abilitys[1],abilitys[0],abilitys[1],abilitys[1],abilitys[2],abilitys[2],abilitys[2],abilitys[2],abilitys[2],abilitys[2],abilitys[2]];
+    
     var skillboxes = document.querySelectorAll(".skillsList li");
     var rollPopup = document.querySelector('#rollPopup');
     document.querySelector('title').innerHTML = characterName;
@@ -327,7 +315,7 @@ function woundMouseover(button, enter)
     {
         woundCurrent.style.color = null;
         woundCurrent.style.fontSize = null;
-        woundCurrent.innerHTML = wounds[1];
+        // woundCurrent.innerHTML = wounds[1];
         return;
     }
 
