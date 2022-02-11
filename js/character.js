@@ -21,8 +21,6 @@ var creditsBox = document.querySelector("#Inventory input");
 
 // Define Constants
 var skillAbilitys = [];
-skillAbilitys = [abilitys[2],abilitys[0],abilitys[5],abilitys[4],abilitys[2],abilitys[5],abilitys[1],abilitys[3],abilitys[4],abilitys[5],abilitys[2],abilitys[2],abilitys[5],abilitys[3],abilitys[1],abilitys[1],abilitys[0],abilitys[3],abilitys[1],abilitys[3],abilitys[3],abilitys[4],abilitys[0],abilitys[1],abilitys[0],abilitys[1],abilitys[1],abilitys[2],abilitys[2],abilitys[2],abilitys[2],abilitys[2],abilitys[2],abilitys[2]];
-
 function addTD(parent, value)
 {
     var td = document.createElement("td");
@@ -30,6 +28,8 @@ function addTD(parent, value)
     parent.appendChild(td);
     return td;
 }
+
+var firstInit = true;
 
 document.querySelector('#rollBtn').onclick = rollCheck;
 init();
@@ -67,6 +67,23 @@ function init()
     }
 
     // Load saved values
+    if (sessionStorage.getItem('characterLoaded') != null)
+    {
+        if (firstInit == true)
+        {
+            var ret = sessionStorage.getItem('characterLoaded');
+            if ((ret == true) ||
+                (ret == 'true'))
+            {
+                // Load the last character
+                setTimeout(() => 
+                {
+                    loadLastUsedCharacter();
+                }, 0);
+            }
+        }
+    }
+
     if (localStorage.getItem("currentWounds") == 'null')
     {
         wounds[1] = 0;        
@@ -113,6 +130,8 @@ function init()
         document.querySelector("#backgroundImagePicker").value = localStorage.getItem("themeColor");
     }
     
+    skillAbilitys = [abilitys[2],abilitys[0],abilitys[5],abilitys[4],abilitys[2],abilitys[5],abilitys[1],abilitys[3],abilitys[4],abilitys[5],abilitys[2],abilitys[2],abilitys[5],abilitys[3],abilitys[1],abilitys[1],abilitys[0],abilitys[3],abilitys[1],abilitys[3],abilitys[3],abilitys[4],abilitys[0],abilitys[1],abilitys[0],abilitys[1],abilitys[1],abilitys[2],abilitys[2],abilitys[2],abilitys[2],abilitys[2],abilitys[2],abilitys[2]];
+
     var skillboxes = document.querySelectorAll(".skillsList li");
     var rollPopup = document.querySelector('#rollPopup');
     document.querySelector('title').innerHTML = characterName;
@@ -208,10 +227,12 @@ function init()
         setBackgroundImage(image.value);
     };
 
-    document.querySelector("#diceRoller").onclick = function()
-    {
-        window.open("diceRoller.html", "", "width=600,height=785")
-    };
+    // document.querySelector("#diceRoller").onclick = function()
+    // {
+    //     window.open("diceRoller.html", "", "width=600,height=785")
+    // };
+
+    firstInit = false;
 }
 var mouseOverRollPopup = false;
 
@@ -442,7 +463,7 @@ var xml;
 
 apply.onclick = function()
 {
-    loadFile(filePicker);
+    loadFile(null, filePicker);
 };
 
 function replaceIcons(text)
@@ -541,6 +562,7 @@ function parseXML()
 
     init();
 }
+
 var xmlFileName;
 document.querySelector('.exportXML').onclick = exportXML;
 function exportXML()
@@ -554,28 +576,41 @@ function exportXML()
     a.remove();
 }
 
-function loadFile(filePickerElm)
+function loadFile(prefile, filePickerElm)
 {
-    var files = filePickerElm.files;
-  
-    if (files.length == 0)
+    if (prefile == null)
     {
-        return;
+        var file;
+        var files = filePickerElm.files;
+        if (files.length == 0)
+        {
+            return;
+        }
+        
+        file = files[0];
+    
+        xmlFileName = file.name;
     }
     
-    var file = files[0];
-    xmlFileName = file.name;
-    localStorage.setItem("LoadedFile", filePickerElm);
-    
     let reader = new FileReader();
-  
+    
     reader.onload = function(e)
     {
-        var file = e.target.result;
+        var filedata;
+        if (prefile == null)
+        {
+            filedata = e.target.result;
+            localStorage.setItem("LastLoadedFile", filedata);
+            localStorage.setItem("LastLoadedFile-name", xmlFileName);
+        }
+        else
+        {
+            filedata = prefile;
+        }
   
         // This is a regular expression to identify carriage 
         // Returns and line breaks
-        var lines = file.split(/\r\n|\n/);
+        var lines = filedata.split(/\r\n|\n/);
         var text = lines.join('\n');
 
         // alert(text);
@@ -585,22 +620,66 @@ function loadFile(filePickerElm)
   
     reader.onerror = (e) => alert(e.target.error.name);
   
-    reader.readAsText(file);
+    if (prefile == null)
+    {
+        reader.readAsText(file);
+    }
+    else
+    {
+        reader.onload();
+    }
 }
 
-document.querySelector(".blackoutModal div input").onchange = function()
+document.querySelector(".blackoutModal div div input").onchange = function onModalFileInputChange()
 {
-    loadFile(document.querySelector(".blackoutModal div input"));
+    loadFile(null, document.querySelector(".blackoutModal div input"));
+    sessionStorage.setItem("characterLoaded", true);
+
     document.querySelector(".blackoutModal").style.display = 'none';
 }
 
-document.querySelector(".blackoutModal div button").onclick = function()
+document.querySelector("#LoadCharacter-Modal").onclick = function()
+{
+    document.querySelector(".blackoutModal div div input").click();
+    sessionStorage.setItem("characterLoaded", true);
+}
+
+document.querySelector("#LoadLastCharacter-Modal").onclick = loadLastUsedCharacter;
+function loadLastUsedCharacter()
+{
+    /* LOAD LAST USED CHARACTER SHEET */
+    if ((localStorage.getItem("LastLoadedFile") == 'null') ||
+        (localStorage.getItem("LastLoadedFile") == null))
+    {
+        alert('No character saved!\n\nLoad a character by clicking "Load Character"');
+    }
+    else
+    {
+        var file = localStorage.getItem("LastLoadedFile");
+        xmlFileName = localStorage.getItem("LastLoadedFile-name");
+
+        loadFile(file, null);
+        sessionStorage.setItem("characterLoaded", true);
+
+        document.querySelector(".blackoutModal").style.display = 'none';
+    }
+}
+
+document.querySelector("#MakeNewCharacter-Modal").onclick = function()
 {
     document.location.href = "characterBuilder.html";
 }
 
+var weaponsEditActive = false;
 document.querySelector(".editHeadder.weapons").onclick = function()
 {
+    if (weaponsEditActive == true)
+    {
+        return;
+    }
+
+    weaponsEditActive = true;
+
     var editButtonsDiv = document.querySelector('.contentEditable.weapons');
     editButtonsDiv.style.display = 'block';
     var weaponsTable = document.querySelector('#weaponsTable');
@@ -650,8 +729,10 @@ document.querySelector(".editHeadder.weapons").onclick = function()
         addedRows[addedRows.length] = row;
     }
 
+    // On save click
     editButtonsDiv.children[1].onclick = function()
     {
+        weaponsEditActive = false;
         var xmlWeapons = xml.getElementsByTagName("weapon");
         for (let i = xmlWeapons.length - 1; i > -1; i--) 
         {
@@ -692,8 +773,16 @@ document.querySelector(".editHeadder.weapons").onclick = function()
     }
 }
 
+var equipmentEditActive = false;
 document.querySelector(".editHeadder.equipment").onclick = function()
 {
+    if (equipmentEditActive == true)
+    {
+        return;
+    }
+
+    equipmentEditActive = true;
+
     var editButtonsDiv = document.querySelector('.contentEditable.equipment');
     editButtonsDiv.style.display = 'block';
     var equipmentTable = document.querySelector('#equipment-table');
@@ -730,8 +819,10 @@ document.querySelector(".editHeadder.equipment").onclick = function()
         };
     }
 
+    // Save button click
     editButtonsDiv.children[1].onclick = function()
     {
+        equipmentEditActive = false;
         var xmlItems = xml.getElementsByTagName("item");
         for (let i = xmlItems.length - 1; i > -1; i--) 
         {

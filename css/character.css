@@ -600,7 +600,7 @@ td
     background-color: black;
 
     width: 300pt;
-    height: 200pt;
+    height: 300pt;
 
     top: 50%;
     left: 50%;
@@ -610,15 +610,34 @@ td
     border: 1pt solid #5a5a5a;
 }
 
-.blackoutModal div input
+.blackoutModal div div input
 {
-    position: relative;
-    left: 23pt;
+    display: none;
 }
 
-.blackoutModal div button
+.blackoutModal div div button
 {
-    top: 85pt;
+    margin-top: 3pt;
+    position: relative;
+    padding: 8pt;
+    border-radius: 10pt;
+    border: 1pt solid #5a5a5a;
+    background-color: var(--forground2);
+}
+
+.blackoutModal div p
+{
+    color: white;
+    margin: 2pt;
+    top: -6pt;
+    position: relative;
+}
+
+.blackoutModal div div
+{
+    top: 25pt;
+    width: 200pt;
+    height: 45pt;
     position: relative;
     padding: 8pt;
     border-radius: 10pt;
@@ -626,9 +645,9 @@ td
     background-color: var(--forground1);
 }
 
-.blackoutModal div button:hover
+.blackoutModal div div button:hover
 {
-    background-color: var(--forground1-hover);
+    background-color: var(--forground2-hover);
 }
 
 @keyframes backgroundShift

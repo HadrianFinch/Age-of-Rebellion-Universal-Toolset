@@ -131,7 +131,7 @@ document.querySelector('#Career select').oninput = function()
     }
     else if (this.value == 'Commander')
     {
-        character.career = Diplomat;
+        character.career = Commander;
     }
     else if (this.value == 'Diplomat')
     {
@@ -168,6 +168,26 @@ document.querySelector('#Career select').oninput = function()
         opt.innerHTML = elm.name;
 
         careerGroup.appendChild(opt);
+    }
+
+    for (let i = 0; i < Careers.length; i++)
+    {
+        var car = Careers[i];
+        for (let b = 0; b < car.specializations.length; b++) 
+        {
+            if (car === career)
+            {
+                break;
+            }
+
+            var elm = car.specializations[b];
+            
+            var opt = document.createElement('option');
+            opt.value = elm.name;
+            opt.innerHTML = elm.name;
+    
+            nonCareerGroup.appendChild(opt);
+        }
     }
 };
 

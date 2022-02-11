@@ -12,9 +12,21 @@
     <div class="blackoutModal">
         <div>
             <h1>Select Character</h1>
-            <input type="file"><br><br>
-            <button>Create Black Character</button>
-            <br><b style="color: red;"></b>
+            <div>
+                <h3>Load New Character</h3>
+                <button id="LoadCharacter-Modal">Load Character</button>
+                <input type="file" accept=".swrpg,.xml">
+            </div>
+            <p>———————————————— or ————————————————</p>
+            <div>
+                <h3>Use last loaded character</h3>
+                <button id="LoadLastCharacter-Modal">Use last character</button>
+            </div>
+            <p>———————————————— or ————————————————</p>
+            <div>
+                <h3>Make a New Character</h3>
+                <button id="MakeNewCharacter-Modal">Create Blank Character</button>
+            </div>
         </div>
     </div>
     <div id="rollPopup">
@@ -205,7 +217,7 @@
                 <b>Activate Ability:</b>
                 <p>    Activate an ability that says "preform an action to..."</p>
                 <b>Skill Check:</b>
-                <p>    Make an skill check to preform an interaction.</p>
+                <p>    Make a skill check to preform an interaction.</p>
 
 
                 <br>
@@ -495,6 +507,7 @@
         </div>
     </div>
     
+    <script src="js/game.js"></script>
     <script src="js/dice.js"></script>
     <script src="js/character.js"></script>
 </body>
