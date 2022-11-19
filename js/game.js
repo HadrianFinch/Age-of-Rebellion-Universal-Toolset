@@ -1,9 +1,9 @@
 
-var skillNames = 
+const skillNames = 
 [
     "Astrogation (Int)","Athletics (Br)","Charm (Pr)","Coercion (Will)","Computers (Int)","Cool (Pr)","Coordination (Ag)","Deception (Cun)","Discipline (Will)", "Leadership (Pr)","Mechanics (Int)","Medicine (Int)","Negotiaion (Pr)","Perception (Cun)","Piloting - Planetary (Ag)","Piloting - Space (Ag)","Resilience (Br)",         "Skulduggery (Cun)",      "Stealth (Ag)",           "Streetwise (Cun)",        "Survival (Cun)",          "Vigilance (Will)",   "Brawl (Br)","Gunnery (Ag)","Melee (Br)","Ranged - Light (Ag)","Ranged - Heavy (Ag)","Core Worlds (Int)","Education (Int)","Lore (Int)","Outer Rim (Int)","Underworld (Int)","Warfare (Int)","Xenology (Int)"
 ];
-var skillIDs = 
+const skillIDs = 
 {
     Astrogation:               0 ,
     Athletics:                 1 ,
@@ -113,7 +113,7 @@ const Sullustan =
     startingXP: 100
 }
 
-const Ace = [];
+const Ace = {};
 Ace.carreerSkills = [0, 5, 23, 10, 13, 14, 15, 25];
 Ace.specializations = 
 [
@@ -131,7 +131,7 @@ Ace.specializations =
     }
 ];
 
-const Commander = [];
+const Commander = {};
 Commander.carreerSkills = [3, 5, 8, 32, 9, 13, 25, 21];
 Commander.specializations = 
 [
@@ -149,7 +149,7 @@ Commander.specializations =
     }
 ];
 
-const Diplomat = [];
+const Diplomat = {};
 Diplomat.carreerSkills = 
 [
     skillIDs.Charm,
@@ -195,7 +195,146 @@ Diplomat.specializations =
     }
 ];
 
+
+const Engineer = {};
+Engineer.carreerSkills = 
+[
+    skillIDs.Athletics,
+    skillIDs.Computers,
+    skillIDs.Education,
+    skillIDs.Mechanics,
+    skillIDs.Perception,
+    skillIDs.PilotingSpace,
+    skillIDs.RangedLight,
+    skillIDs.Vigilance
+];
+Engineer.specializations = 
+[
+    {
+        name: 'Mechanic',
+        additionalCareerSkills: 
+        [
+            skillIDs.Brawl,
+            skillIDs.Mechanics,
+            skillIDs.PilotingSpace,
+            skillIDs.Skulduggery
+        ]
+    },
+    {
+        name: 'Saboteur',
+        additionalCareerSkills: 
+        [
+            skillIDs.Coordination,
+            skillIDs.Mechanics,
+            skillIDs.Skulduggery,
+            skillIDs.Stealth,
+        ]
+    },
+    {
+        name: 'Scientist',
+        additionalCareerSkills: 
+        [
+            skillIDs.Computers,
+            skillIDs.Education,
+            skillIDs.Lore,
+            skillIDs.Medicine
+        ]
+    }
+];
+
+const Soldier = {};
+Soldier.carreerSkills = 
+[
+    skillIDs.Athletics,
+    skillIDs.Brawl,
+    skillIDs.Warfare,
+    skillIDs.Medicine,
+    skillIDs.Melee,
+    skillIDs.RangedLight,
+    skillIDs.RangedHeavy,
+    skillIDs.Survival
+];
+Soldier.specializations = 
+[
+    {
+        name: 'Commando',
+        additionalCareerSkills: 
+        [
+            skillIDs.Brawl,
+            skillIDs.Melee,
+            skillIDs.Resilience,
+            skillIDs.Survival
+        ]
+    },
+    {
+        name: 'Medic',
+        additionalCareerSkills: 
+        [
+            skillIDs.Xenology,
+            skillIDs.Medicine,
+            skillIDs.Resilience,
+            skillIDs.Vigilance,
+        ]
+    },
+    {
+        name: 'Sharpshooter',
+        additionalCareerSkills: 
+        [
+            skillIDs.Cool,
+            skillIDs.Perception,
+            skillIDs.RangedHeavy,
+            skillIDs.RangedLight
+        ]
+    }
+];
+
+const Spy = {};
+Spy.carreerSkills = 
+[
+    skillIDs.Computers,
+    skillIDs.Cool,
+    skillIDs.Coordination,
+    skillIDs.Deception,
+    skillIDs.Warfare,
+    skillIDs.Perception,
+    skillIDs.Skulduggery,
+    skillIDs.Stealth
+];
+Spy.specializations = 
+[
+    {
+        name: 'Infiltrator',
+        additionalCareerSkills: 
+        [
+            skillIDs.Deception,
+            skillIDs.Melee,
+            skillIDs.Skulduggery,
+            skillIDs.Streetwise
+        ]
+    },
+    {
+        name: 'Scout',
+        additionalCareerSkills: 
+        [
+            skillIDs.Athletics,
+            skillIDs.Medicine,
+            skillIDs.PilotingPlanetary,
+            skillIDs.Survival,
+        ]
+    },
+    {
+        name: 'Slicer',
+        additionalCareerSkills: 
+        [
+            skillIDs.Computers,
+            skillIDs.Education,
+            skillIDs.Underworld,
+            skillIDs.Stealth
+        ]
+    }
+];
+
 //-----------TODO-------------
 // *** DO THE REST OF THEM ***
 
-const Careers = [Ace, Commander, Diplomat];
+const Careers = [Ace, Commander, Diplomat, Engineer, Soldier, Spy];

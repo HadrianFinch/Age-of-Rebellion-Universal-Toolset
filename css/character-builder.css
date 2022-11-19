@@ -194,3 +194,13 @@ select option
 {
     color: var(--themecolor);
 }
+
+.careerOption
+{
+    display: none;
+}
+
+h3
+{
+    color: var(--themecolor);
+}

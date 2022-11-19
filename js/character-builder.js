@@ -149,10 +149,6 @@ document.querySelector('#Career select').oninput = function()
     {
         character.career = Spy;
     }
-    else if (this.value == 'Recruit')
-    {
-        character.career = Recruit;
-    }
     var career = character.career;
 
     removeAllChildNodes(careerGroup);
@@ -166,9 +162,13 @@ document.querySelector('#Career select').oninput = function()
         var opt = document.createElement('option');
         opt.value = elm.name;
         opt.innerHTML = elm.name;
-
+        
         careerGroup.appendChild(opt);
     }
+    var recruitOpt = document.createElement('option');
+    recruitOpt.value = "Recruit";
+    recruitOpt.innerHTML = "Recruit (universal)";
+    careerGroup.appendChild(recruitOpt);
 
     for (let i = 0; i < Careers.length; i++)
     {
@@ -187,6 +187,20 @@ document.querySelector('#Career select').oninput = function()
             opt.innerHTML = elm.name;
     
             nonCareerGroup.appendChild(opt);
+        }
+    }
+
+    const careerDisplayDivs = document.getElementsByName("careerOption");
+    for (let i = 0; i < careerDisplayDivs.length; i++)
+    {
+        const elm = careerDisplayDivs[i];
+        if (elm.id = this.value)
+        {
+            elm.style.display = "block";
+        }
+        else
+        {
+            elm.style.display = null;
         }
     }
 };
